@@ -1,0 +1,72 @@
+@startuml
+
+Title Game
+namespace UnityBuild{
+class Monobehavior{
++void Start()
++void FixedUpdate()
+}
+class Vector3{
+
+}
+class Transform{
+
+}
+}
+
+class Player{
+
++ void Move()
++ void Attack()
++ void ChangeWeapon()
+}
+
+abstract class Entity{
+- Health
+- Movespeed
+
+}
+abstract class hostilemob{
++ void AttackPlayer()
+
+}
+abstract class Ranged{
+
+}
+abstract class Bruiser{
+
+}
+abstract class Spawner{
+
+}
+
+class PlayerShield{
++ void ThrowShield()
++ void RecallShield()
+}
+
+abstract class Weapons{
+- damage
+- firerate
++ void pickup
+}
+
+abstract class Buffs{
+
+}
+
+
+hostilemob -up-|> Entity
+Player -up-|> Entity 
+hostilemob <|-- Ranged
+hostilemob <|-- Bruiser
+hostilemob <|-- Spawner 
+Entity -up-|> UnityBuild.Monobehavior
+Entity -up-|> UnityBuild.Vector3
+Entity -up-|> UnityBuild.Transform
+Player -> PlayerShield
+Weapons -|> Player
+Buffs --|> Player
+
+
+@enduml
