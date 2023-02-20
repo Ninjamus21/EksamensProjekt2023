@@ -6,7 +6,7 @@ public class CameraFollow : MonoBehaviour
 {
     public Transform targetObject;
     private Vector3 initalOffset;
-    private Vector3 cameraPosition;
+
 
     void Start()
     {
@@ -15,7 +15,8 @@ public class CameraFollow : MonoBehaviour
 
     void FixedUpdate()
     {
-        cameraPosition = targetObject.position + initalOffset;
-        transform.position = cameraPosition;
+        Camera.main.transform.position = targetObject.position + initalOffset;
+
     }
+    
 }

@@ -19,10 +19,12 @@ class Player{
 + void Move()
 + void Attack()
 + void ChangeWeapon()
+- bool online() = false
 }
 
 abstract class Entity{
 - Health
+- Damage
 - Movespeed
 
 }
