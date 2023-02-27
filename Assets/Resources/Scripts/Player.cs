@@ -13,7 +13,7 @@ public class Player : Entity
     }
 
     // Update is called once per frame
-    void fixedUpdate()
+    /*void fixedUpdate()
     {
         void Move()
         {
@@ -23,4 +23,5 @@ public class Player : Entity
             transform.Translate(Vector3.forward * verticalInput * movespeed * Time.deltaTime);
         }
     }
+    */
 }
