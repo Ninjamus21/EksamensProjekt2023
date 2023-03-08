@@ -5,23 +5,41 @@ using UnityEngine;
 public class Player : Entity
 {
 
+    Rigidbody body;
 
-    // Start is called before the first frame update
+    float horizontal;
+    float vertical;
+    float moveLimiter = 0.7f;
+    public float runSpeed = 20.0f;
+
     void Start()
     {
-        
+        body = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    /*void fixedUpdate()
+    void Update()
     {
-        void Move()
-        {
-            float horizontalInput = Input.GetAxis("Horizontal");
-            float verticalInput = Input.GetAxis("Vertical");
-            transform.Translate(Vector3.right * horizontalInput * movespeed * Time.deltaTime);
-            transform.Translate(Vector3.forward * verticalInput * movespeed * Time.deltaTime);
-        }
+        // Gives a value between -1 and 1
+        // moving 
+        horizontal = Input.GetAxisRaw("Horizontal"); // -1 is left
+        vertical = Input.GetAxisRaw("Vertical"); // -1 is down
+
+        // rotate player to face mouse position on screen 
+        Debug.DrawRay(transform.position, transform.forward * 1000, Color.red);
+        Debug.DrawRay(transform.position, Camera.main.WorldToScreenPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 5f)), Color.blue);
+
+
     }
-    */
+
+    void FixedUpdate()
+    {
+        if (horizontal != 0 && vertical != 0) // Check for diagonal movement
+        {
+            // limit movement speed diagonally, so you move at 70% speed
+            horizontal *= moveLimiter;
+            vertical *= moveLimiter;
+        }
+
+        body.velocity = new Vector3(horizontal * runSpeed, 0, vertical * runSpeed);
+    }
 }

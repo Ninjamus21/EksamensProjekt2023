@@ -1,27 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class ShieldRotate : Player {
-    public Transform target;
-    public float radius;
-    private Transform pivot;
-  void Start()
+
+public class ShieldRotate : Player
+{
+   /*
+    public Transform targetObject;
+
+    void Update()
     {
-        pivot = target.transform;
-        transform.parent = pivot;
-        transform.position += Vector3.up * radius;
-    }
-    void Update () {
-        Vector3 orbVector = Camera.main.WorldToScreenPoint(target.position);
-        orbVector = Input.mousePosition - orbVector;
-        float angle = Mathf.Atan2(orbVector.y, orbVector.x) * Mathf.Rad2Deg;
- 
-        pivot.position = target.position;
-        pivot.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+        // Get the mouse position in screen space
+        Vector3 mousePos = Input.mousePosition;
+        mousePos.z = -Camera.main.transform.position.z;
 
+        // Convert the mouse position to world space
+        Vector3 mousePosWorld = Camera.main.ScreenToWorldPoint(mousePos);
+
+        // Calculate the angle between the vector from the target object to the mouse position and the x-axis
+        float angle = Mathf.Atan2(mousePosWorld.z - targetObject.position.z, mousePosWorld.x - targetObject.position.x) * Mathf.Rad2Deg;
+
+        // Set the rotation of the object
+        transform.rotation = Quaternion.Euler(0, 0, angle);
     }
+
+*/
+
+
+ void Update()
+{
+   var dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
+   var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+   transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 }
-
-
-
-
+}
