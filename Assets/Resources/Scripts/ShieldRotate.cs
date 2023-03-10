@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShieldRotate : Player
+public class ShieldRotate : MonoBehaviour
 {
    /*
     public Transform targetObject;

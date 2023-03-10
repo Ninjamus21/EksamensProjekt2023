@@ -2,44 +2,51 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : Entity
+public class Player : MonoBehaviour
 {
-
-    Rigidbody body;
-
-    float horizontal;
-    float vertical;
-    float moveLimiter = 0.7f;
+    public Rigidbody body;
+    public Camera cam;
     public float runSpeed = 20.0f;
 
-    void Start()
-    {
-        body = GetComponent<Rigidbody>();
-    }
+    float moveLimiter = 0.7f;
+    Vector3 movement;
+    Vector3 mousePos;
 
     void Update()
     {
-        // Gives a value between -1 and 1
-        // moving 
-        horizontal = Input.GetAxisRaw("Horizontal"); // -1 is left
-        vertical = Input.GetAxisRaw("Vertical"); // -1 is down
+        // Get horizontal and vertical input
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
 
-        // rotate player to face mouse position on screen 
-        Debug.DrawRay(transform.position, transform.forward * 1000, Color.red);
-        Debug.DrawRay(transform.position, Camera.main.WorldToScreenPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 5f)), Color.blue);
-
-
-    }
-
-    void FixedUpdate()
-    {
-        if (horizontal != 0 && vertical != 0) // Check for diagonal movement
+        // Limit diagonal movement speed stops speed gains when pressing two keys.
+        if (horizontal != 0 && vertical != 0)
         {
-            // limit movement speed diagonally, so you move at 70% speed
             horizontal *= moveLimiter;
             vertical *= moveLimiter;
         }
 
-        body.velocity = new Vector3(horizontal * runSpeed, 0, vertical * runSpeed);
+        // Set movement vector based on input, its makes the y axis 0 so the player doesn't move up or down
+        movement = new Vector3(horizontal, 0f, vertical);
+
+        // Get mouse position in world space
+        Ray mouseRay = cam.ScreenPointToRay(Input.mousePosition);
+        float distance;
+        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+        if (groundPlane.Raycast(mouseRay, out distance))
+        {
+            mousePos = mouseRay.GetPoint(distance);
+        }
+    }
+
+    void FixedUpdate()
+    {
+        // Move the rigidbody based on movement vector and run speed
+        body.MovePosition(body.position + movement * runSpeed * Time.fixedDeltaTime);
+
+        // Rotate the rigidbody to face the mouse position
+        Vector3 lookDir = mousePos - body.position;
+        lookDir.y = 0f;
+        Quaternion rotation = Quaternion.LookRotation(lookDir);
+        body.MoveRotation(rotation);
     }
 }
