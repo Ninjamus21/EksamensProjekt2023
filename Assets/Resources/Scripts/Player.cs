@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     public Rigidbody body;
     public Camera cam;
     public float runSpeed = 20.0f;
+    public float ResetYThredhold = -0.5f;
 
     float moveLimiter = 0.7f;
     Vector3 movement;
@@ -48,5 +49,12 @@ public class Player : MonoBehaviour
         lookDir.y = 0f;
         Quaternion rotation = Quaternion.LookRotation(lookDir);
         body.MoveRotation(rotation);
+
+        // stop the player from going under the ground
+        if (transform.position.y < ResetYThredhold)
+        {
+            body.velocity = Vector3.zero;
+            transform.position = new Vector3(0, 0.5f, 0);
+        }
     }
 }
