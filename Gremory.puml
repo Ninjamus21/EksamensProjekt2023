@@ -14,6 +14,11 @@ class Transform{
 }
 }
 
+abstract class Utility{
++ void use()
++ void pickup()
+}
+
 class Player{
 
 + void Move()
@@ -66,9 +71,10 @@ hostilemob <|-- Spawner
 Entity -up-|> UnityBuild.Monobehavior
 Entity -up-|> UnityBuild.Vector3
 Entity -up-|> UnityBuild.Transform
+Utility -up-|> UnityBuild.Monobehavior
+Utility -up-|> UnityBuild.Vector3
+Utility -up-|> UnityBuild.Transform
 Player -> PlayerShield
 Weapons -|> Player
-Buffs --|> Player
-
-
+Buffs --|> Utility
 @enduml
