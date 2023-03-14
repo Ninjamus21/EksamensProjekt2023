@@ -1,22 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Ranger : Enemy
 {
 
 public Transform player;
 public GameObject bulletPrefab;
-public float fireRate = 1.0f;
+public float fireRate = 2.0f;
 public float bulletSpeed = 10.0f;
 public float distanceToPlayer = 10.0f;
+public float fixedYPosition = 0.5f;
 private float timeSinceLastFire = 0.0f;
+private NavMeshAgent navAgent;
+
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        navAgent = GetComponent<NavMeshAgent>();
     }
 
     // Update is called once per frame
@@ -24,6 +28,7 @@ private float timeSinceLastFire = 0.0f;
     {
         
         Cooldown();
+        Move();
     }
     void FixedUpdate()
     {
@@ -42,12 +47,13 @@ private float timeSinceLastFire = 0.0f;
     public override void track()
     {
         transform.LookAt(player);
-        transform.position = player.position - transform.forward * distanceToPlayer;
-
     }
     public override void Move()
     {
-        throw new System.NotImplementedException();
+        if (navAgent != null && navAgent.isActiveAndEnabled) {
+        Vector3 targetPosition = new Vector3(player.position.x, fixedYPosition, player.position.z);
+        navAgent.SetDestination(targetPosition);
+        }
     }
     public override void Die()
     {
@@ -71,5 +77,6 @@ private float timeSinceLastFire = 0.0f;
         Attack();
         timeSinceLastFire = 0.0f;
     }
-}
+    }
+
 }
