@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6585109089927988443}
   m_Layer: 0
   m_Name: Counter bullet
-  m_TagString: Bullet
+  m_TagString: Counter Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

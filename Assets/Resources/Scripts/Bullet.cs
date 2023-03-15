@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public Vector3 bulletDirection;
+    public GameObject targetObject;
+    private RaycastHit hit;
+    private float distance = 100.0f;
+    private LayerMask targetLayerMask;
+
     // Start is called before the first frame update
     void Start()
     {
-    
+    targetLayerMask = LayerMask.GetMask("TargetObject");
     }
 
     // Update is called once per frame
@@ -19,18 +23,13 @@ public class Bullet : MonoBehaviour
     
     public void OnCollisionEnter(Collision collision)
     {
-      if (collision.gameObject.tag == "Ranger")
+      if (collision.gameObject.tag == "Ranger" || collision.gameObject.tag == "bullet")
         {
             //Yes, do nothing
         } 
-        else if (collision.gameObject.tag == "Bullet")
-        {
-            //Yes, do nothing
-        }
         else if (collision.gameObject.tag == "Shield")
         {
-            Vector3 normal = collision.contacts[0].normal;
-            bulletDirection = Vector3.Reflect(bulletDirection, normal);
+           //Yes, do nothing
         }
         else
         {
@@ -38,4 +37,13 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
         }
     }
-}    
+    public void ray(){
+        Debug.Log("Raycasting...");
+       if (Physics.Raycast(transform.position, targetObject.transform.position - transform.position, out hit, distance, targetLayerMask))
+        {
+            Debug.DrawRay(transform.position, hit.point, Color.red);
+            Debug.Log("Hit targetObject!");
+        }
+        }
+    }
+      

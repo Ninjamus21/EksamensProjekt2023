@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f3a060883947da488ead04aa07f8fb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletDirection: {x: 0, y: 0, z: 0}
+  targetObject: {fileID: 4861447159484120020, guid: a97a9fa90d18ee44a920182abc63c220, type: 3}
 --- !u!54 &6585109089927988443
 Rigidbody:
   m_ObjectHideFlags: 0
