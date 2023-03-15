@@ -4,9 +4,9 @@ using UnityEngine;
 
 abstract public class Enemy : Entity
 {
-    private float health;
-    private float damage;
-    private float movespeed;
+    // private float health;
+    // private float damage;
+    // private float movespeed;
     // Start is called before the first frame update
     void Start()
     {

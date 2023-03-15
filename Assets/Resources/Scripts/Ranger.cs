@@ -6,14 +6,13 @@ using UnityEngine.AI;
 public class Ranger : Enemy
 {
 
-public Transform player;
-public GameObject bulletPrefab;
-public float fireRate = 2.0f;
-public float bulletSpeed = 10.0f;
-public float distanceToPlayer = 10.0f;
-public float fixedYPosition = 0.5f;
-private float timeSinceLastFire = 0.0f;
-private NavMeshAgent navAgent;
+    public Transform player;
+    public GameObject bulletPrefab;
+    public float fireRate = 10.0f;
+    public float bulletSpeed = 10.0f;
+    public float fixedYPosition = 0.5f;
+    private float timeSinceLastFire = 0.0f;
+    private NavMeshAgent navAgent;
 
 
 
@@ -26,33 +25,33 @@ private NavMeshAgent navAgent;
     // Update is called once per frame
     void Update()
     {
-        
+
         Cooldown();
         Move();
     }
     void FixedUpdate()
     {
         track();
-        Attack();
     }
 
     public override void Attack()
-    { 
+    {
 
-    GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-    bullet.GetComponent<Rigidbody>().velocity = transform.forward * bulletSpeed;
-    Destroy(bullet, 5.0f);
+        GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+        bullet.GetComponent<Rigidbody>().velocity = transform.forward * bulletSpeed;
+        Destroy(bullet, 5.0f);
     }
-    
+
     public override void track()
     {
         transform.LookAt(player);
     }
     public override void Move()
     {
-        if (navAgent != null && navAgent.isActiveAndEnabled) {
-        Vector3 targetPosition = new Vector3(player.position.x, fixedYPosition, player.position.z);
-        navAgent.SetDestination(targetPosition);
+        if (navAgent != null && navAgent.isActiveAndEnabled)
+        {
+            Vector3 targetPosition = new Vector3(player.position.x, fixedYPosition, player.position.z);
+            navAgent.SetDestination(targetPosition);
         }
     }
     public override void Die()
@@ -73,10 +72,11 @@ private NavMeshAgent navAgent;
     public override void Cooldown()
     {
         timeSinceLastFire += Time.deltaTime;
-        if (timeSinceLastFire > 1.0f / fireRate) {
-        Attack();
-        timeSinceLastFire = 0.0f;
-    }
+        if (timeSinceLastFire >= 1.0f / fireRate)
+        {
+            Attack();
+            timeSinceLastFire = 0.0f;
+        }
     }
 
 }
