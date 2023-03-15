@@ -5,8 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
-  - ObjectToDespawn
   - Ranger
+  - Bullet
+  - ObjectToDespawn
+  - Shield
+  - Counter Bullet
   layers:
   - Default
   - TransparentFX

@@ -72,7 +72,7 @@ public class Ranger : Enemy
     public override void Cooldown()
     {
         timeSinceLastFire += Time.deltaTime;
-        if (timeSinceLastFire >= 1.0f / fireRate)
+        if (timeSinceLastFire >= 1.0f / fireRate + Random.Range(0.0f, 1.0f))
         {
             Attack();
             timeSinceLastFire = 0.0f;
