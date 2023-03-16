@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class Ranger : Enemy
 {
-
+    
     public Transform player;
     public GameObject bulletPrefab;
     public float fireRate = 10.0f;
@@ -20,6 +20,8 @@ public class Ranger : Enemy
     void Start()
     {
         navAgent = GetComponent<NavMeshAgent>();
+        health = 2;
+        damage = 1;
     }
 
     // Update is called once per frame
@@ -28,6 +30,8 @@ public class Ranger : Enemy
 
         Cooldown();
         Move();
+        //trackPos();
+        //KeepDistance();
     }
     void FixedUpdate()
     {
@@ -54,10 +58,7 @@ public class Ranger : Enemy
             navAgent.SetDestination(targetPosition);
         }
     }
-    public override void Die()
-    {
-        throw new System.NotImplementedException();
-    }
+    
 
     public override void Spawn()
     {
@@ -66,7 +67,11 @@ public class Ranger : Enemy
 
     public override void TakeDamage(float _damage)
     {
-        throw new System.NotImplementedException();
+        health -= _damage;
+        if (health <= 0)
+        {
+            die();
+        }
     }
 
     public override void Cooldown()
@@ -78,5 +83,7 @@ public class Ranger : Enemy
             timeSinceLastFire = 0.0f;
         }
     }
-
 }
+
+
+       

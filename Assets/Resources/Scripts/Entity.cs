@@ -4,11 +4,17 @@ using UnityEngine;
 
 public abstract class Entity : MonoBehaviour
 {
-    private float health;
-    private float damage;
-    private float movespeed;
-    void takeDamage(float _damage)
+    protected float health;
+    protected float damage;
+    public void takeDamage(float _damage)
     {
         health -= _damage;
+        if(health <= 0)
+        {
+            die();
+        }
+    }
+    public void die(){
+        Destroy(gameObject);
     }
 }

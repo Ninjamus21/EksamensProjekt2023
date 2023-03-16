@@ -33,8 +33,7 @@ abstract class Entity{
 - Movespeed
 
 }
-abstract class hostilemob{
-+ void AttackPlayer()
+abstract class Enemy{
 
 }
 abstract class Ranged{
@@ -63,11 +62,11 @@ abstract class Buffs{
 }
 
 
-hostilemob -up-|> Entity
+Enemy -up-|> Entity
 Player -up-|> Entity 
-hostilemob <|-- Ranged
-hostilemob <|-- Bruiser
-hostilemob <|-- Spawner 
+Enemy <|-- Ranged
+Enemy <|-- Bruiser
+Enemy <|-- Spawner 
 Entity -up-|> UnityBuild.Monobehavior
 Entity -up-|> UnityBuild.Vector3
 Entity -up-|> UnityBuild.Transform

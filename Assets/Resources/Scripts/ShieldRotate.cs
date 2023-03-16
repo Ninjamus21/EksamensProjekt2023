@@ -23,12 +23,12 @@ public class ShieldRotate : MonoBehaviour
 
     void ShieldPosition()
     {
-        // Get mouse position in world space
+        // Create a ray from the mouse cursor on screen in the direction of the camera
         Ray mouseray = Camera.main.ScreenPointToRay(Input.mousePosition);
         Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
         float distance;
 
-        // If the ray hits the ground plane, set the target position to the mouse position
+        // If the ray hits the ground plane, set the target position to the mouse position 
         if (groundPlane.Raycast(mouseray, out distance))
         {
             targetPosition = mouseray.GetPoint(distance);
@@ -48,5 +48,4 @@ public class ShieldRotate : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * rotationSpeed);
     }
 
- 
 }
