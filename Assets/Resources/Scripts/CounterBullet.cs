@@ -17,4 +17,9 @@ public class CounterBullet : MonoBehaviour
     {
         Destroy(gameObject, time);
     }
+    public void OnCollisionEnter(Collision collision){
+        if(collision.gameObject.tag == "Ranger"){
+            Destroy(gameObject);
+        }
+    }
 }

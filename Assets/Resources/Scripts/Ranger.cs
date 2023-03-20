@@ -13,6 +13,7 @@ public class Ranger : Enemy
     public float fixedYPosition = 0.5f;
     private float timeSinceLastFire = 0.0f;
     private NavMeshAgent navAgent;
+    public ParticleSystem particleEffect;
 
 
 
@@ -22,16 +23,15 @@ public class Ranger : Enemy
         navAgent = GetComponent<NavMeshAgent>();
         health = 2;
         damage = 1;
+        
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-
         Cooldown();
         Move();
-        //trackPos();
-        //KeepDistance();
     }
     void FixedUpdate()
     {
@@ -70,7 +70,9 @@ public class Ranger : Enemy
         health -= _damage;
         if (health <= 0)
         {
+            Instantiate(particleEffect, transform.position, Quaternion.identity);
             die();
+            
         }
     }
 
@@ -81,6 +83,15 @@ public class Ranger : Enemy
         {
             Attack();
             timeSinceLastFire = 0.0f;
+        }
+    }
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Counter Bullet")
+        {
+            TakeDamage(damage);
+
+            
         }
     }
 }

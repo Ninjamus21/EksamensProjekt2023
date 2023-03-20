@@ -117,6 +117,7 @@ MonoBehaviour:
   fireRate: 1
   bulletSpeed: 17
   fixedYPosition: 0.25
+  particleEffect: {fileID: 8601737758111705485, guid: 30ffcaf863129934bb0ff4a151cfee6e, type: 3}
 --- !u!54 &4861447159484120030
 Rigidbody:
   m_ObjectHideFlags: 0
