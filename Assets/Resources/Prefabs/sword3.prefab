@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 665819105983272336}
+  - component: {fileID: 2523432515302867247}
   m_Layer: 0
   m_Name: sword3
   m_TagString: Untagged
@@ -32,6 +33,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2523432515302867247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 177512164871720746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95b26a193248f6746a7a37c82f564d7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Highlander: {fileID: 6226409471511247744, guid: 420cbc18c8737c242a2a5fc22647beab, type: 3}
+  spinspeed: 5
 --- !u!1 &417674074825418459
 GameObject:
   m_ObjectHideFlags: 0
