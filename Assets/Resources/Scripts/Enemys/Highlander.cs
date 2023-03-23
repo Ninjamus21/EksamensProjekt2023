@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Highlander : Enemy
 {
+    public GameObject sword;
     public override void Attack()
     {
         throw new System.NotImplementedException();
@@ -37,7 +38,7 @@ public class Highlander : Enemy
     // Start is called before the first frame update
     void Start()
     {
-        
+        Instantiate(sword);
     }
 
     // Update is called once per frame
