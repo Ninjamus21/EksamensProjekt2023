@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Sword : MonoBehaviour
 {
-    public Transform TargetEnemy;
+    /*
+    
     public float offset = 1f;
     public float rotationSpeed = 10f;
     public float followSpeed = 5f;
-    private float _angle = 0f;
     private Vector3 targetPosition;
 
 
@@ -25,7 +25,7 @@ public class Sword : MonoBehaviour
 
     }
 
-    /*
+    
     void DistanceFromEnemy()
     {
         Vector3 orbitPosition = new Vector3(
@@ -38,7 +38,7 @@ public class Sword : MonoBehaviour
         // Increase the angle based on the speed
         _angle += rotationSpeed * Time.deltaTime;
     }
-    */
+    
     void tet(){
     Vector3 targetPositionNoY = new Vector3(targetPosition.x, TargetEnemy.position.y, targetPosition.z);
             targetPosition = TargetEnemy.position + (targetPositionNoY - TargetEnemy.position).normalized * offset;
@@ -55,4 +55,5 @@ public class Sword : MonoBehaviour
    {
          transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * followSpeed);
    }
+   */
 }
