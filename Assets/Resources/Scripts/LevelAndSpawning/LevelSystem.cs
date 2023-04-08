@@ -1,61 +1,61 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelSystem : MonoBehaviour
 {
-    [SerializeField] private List<EnemyWave> enemyWaves; // A list of enemy waves
-    [SerializeField] private float timeBetweenWaves; // The time in seconds between waves
-    private int currentWaveIndex = 0; // The current wave index
-    private bool isSpawning = false; // Whether or not enemies are currently spawning
+    public GameObject[] enemyPrefabs; // Array of enemy prefabs to be instantiated
+    public Transform[] spawnPoints; // Array of spawn points for the enemies
+    public int enemiesPerLevel = 10; // Number of enemies to spawn per level
+    public int currentLevel = 1; // Current level
+    public float spawnDelay = 2f; // Delay between enemy spawns
+    private int enemiesSpawned = 0; // Number of enemies spawned in the current level
+    public float maxSpawnRadius = 10f; // Maximum distance from the spawn point that an enemy can spawn
 
-    // Start the first wave when the script is enabled
-    private void OnEnable()
+    void Start()
     {
-        StartNextWave();
+        SpawnEnemies();
     }
 
-    // Update is called once per frame
-    private void Update()
+    void SpawnEnemies()
     {
-        // If all enemies in the current wave have been killed, start the next wave
-        if (!isSpawning && EnemyManager.Instance.GetActiveEnemiesCount() == 0)
+        // Loop through each spawn point
+        for (int i = 0; i < spawnPoints.Length; i++)
         {
-            StartCoroutine(StartNextWaveAfterDelay());
-        }
-    }
+            // Instantiate a random enemy prefab at the current spawn point
+            GameObject enemy = Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)], spawnPoints[i].position, Quaternion.identity);
 
-    // Start the next wave after a delay
-    private IEnumerator StartNextWaveAfterDelay()
+            // Set the enemy's name to include its type and spawn point index
+            enemy.name = enemy.name + " " + i;
+
+            // Increase the number of enemies spawned in the current level
+            enemiesSpawned++;
+
+            // If we've spawned the required number of enemies for this level, move on to the next level
+            if (enemiesSpawned >= enemiesPerLevel)
+            {
+                currentLevel++;
+                enemiesSpawned = 0;
+                enemiesPerLevel += 5; // Increase the number of enemies required for the next level
+                spawnDelay *= 0.9f; // Decrease the delay between enemy spawns for the next level
+                StartCoroutine(DelayedSpawn()); // Call SpawnEnemies() again after a delay
+                return;
+            }
+       
+            // Generate a random point within a sphere around the current spawn point
+            Vector3 randomPos = Random.insideUnitSphere * maxSpawnRadius + spawnPoints[i].position;
+
+            // Clamp the random point to the maximum spawn distance from the spawn point
+            randomPos = Vector3.ClampMagnitude(randomPos - spawnPoints[i].position, maxSpawnRadius) + spawnPoints[i].position;
+        }
+
+        // Call SpawnEnemies() again after a delay
+        StartCoroutine(DelayedSpawn());
+    }
+    IEnumerator DelayedSpawn()
     {
-        isSpawning = true;
-        yield return new WaitForSeconds(timeBetweenWaves);
-        StartNextWave();
+        yield return new WaitForSeconds(spawnDelay);
+        SpawnEnemies();
     }
-
-    // Start the next wave of enemies
-    private void StartNextWave()
-    {
-        if (currentWaveIndex < enemyWaves.Count)
-        {
-            EnemyWave wave = enemyWaves[currentWaveIndex];
-            StartCoroutine(EnemyManager.Instance.SpawnEnemiesInWave(wave));
-            currentWaveIndex++;
-        }
-        else
-        {
-            // If there are no more waves, end the game or do something else
-            Debug.Log("No more waves!");
-        }
-    }
-}
-
-[System.Serializable]
-public class EnemyWave
-{
-    [SerializeField] private List<GameObject> enemies; // A list of enemy prefabs to spawn
-    [SerializeField] private int numEnemies; // The number of enemies to spawn in this wave
-    [SerializeField] private float timeBetweenSpawns; // The time in seconds between enemy spawns
 
 }
