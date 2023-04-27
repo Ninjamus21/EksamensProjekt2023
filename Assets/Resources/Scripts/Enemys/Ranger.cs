@@ -24,7 +24,8 @@ public class Ranger : Enemy
         health = 2;
         damage = 1;
         
-        
+        //Find player
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     // Update is called once per frame

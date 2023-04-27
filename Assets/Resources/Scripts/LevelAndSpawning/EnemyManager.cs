@@ -5,7 +5,11 @@ public class EnemyManager : MonoBehaviour
 {
     public static EnemyManager Instance; // Singleton instance of the class
 
-    public List<int> SpawnEnemiesInWave = new List<int>() { 1, 1, 2, 1, 1 };
+    public Dictionary<int, List<int>> Waves = new Dictionary<int, List<int>>();
+    public List<int> SpawnEnemiesInWave_one = new List<int>() {1, 1, 2, 1, 1 };
+    public List<int> SpawnEnemiesInWave_two = new List<int>() { 1, 1, 2, 1, 1, 2, 1, 1 };
+
+    public int currentLevel = 1; // Current level
 
     public Player p;
     public GameObject Ranger; // The first enemy prefab
@@ -54,11 +58,11 @@ public class EnemyManager : MonoBehaviour
     public IEnumerator<WaitForSeconds> SpawnEnemyAfterDelay(GameObject prefab, float delay)
     {
         yield return new WaitForSeconds(delay);
-        if (SpawnEnemiesInWave.Count > 0)
+        if (SpawnEnemiesInWave_one.Count > 0)
         {
-            int enem = SpawnEnemiesInWave[0];
+            int enem = SpawnEnemiesInWave_one[0];
             SpawnEnemy(enem);
-            SpawnEnemiesInWave.RemoveAt(0);
+            SpawnEnemiesInWave_one.RemoveAt(0);
 
         }
 
