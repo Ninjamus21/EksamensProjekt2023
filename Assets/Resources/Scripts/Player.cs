@@ -1,24 +1,26 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class Player : Entity
 {
     public Rigidbody body;
     public Camera cam;
-    public float runSpeed = 20.0f;
+    public float speed = 20.0f;
     public float ResetYThredhold = -0.5f;
-
+    public bool speedup = false;
+    public float buff = 1.0f;
     float moveLimiter = 0.7f;
+    float currentSpeed;
     Vector3 movement;
     Vector3 mousePos;
 
-void Update()
+    void Update()
     {
         move();
         moisePos();
     }
-void FixedUpdate()
+    void FixedUpdate()
     {
         look();
         overground();
@@ -33,14 +35,15 @@ void FixedUpdate()
         // Limit diagonal movement speed stops speed gains when pressing two keys.
         if (horizontal != 0 && vertical != 0)
         {
-            horizontal *= moveLimiter;
-            vertical *= moveLimiter;
+            horizontal *= buff * moveLimiter;
+            vertical *= buff * moveLimiter;
         }
 
         // Set movement vector based on input, its makes the y axis 0 so the player doesn't move up or down
         movement = new Vector3(horizontal, 0f, vertical);
     }
-    void moisePos(){
+    void moisePos()
+    {
         // Get mouse position in world space
         Ray mouseRay = cam.ScreenPointToRay(Input.mousePosition);
         float distance;
@@ -50,12 +53,13 @@ void FixedUpdate()
             mousePos = mouseRay.GetPoint(distance);
         }
     }
-    
-   
-    void transformMove(){
+
+
+    void transformMove()
+    {
         // Move the rigidbody based on movement vector and run speed
-        body.MovePosition(body.position + movement * runSpeed * Time.fixedDeltaTime);
-    } 
+        body.MovePosition(body.position + movement * speed * Time.fixedDeltaTime);
+    }
     void look()
     {
         // Rotate the rigidbody to face the mouse position
@@ -64,7 +68,8 @@ void FixedUpdate()
         Quaternion rotation = Quaternion.LookRotation(lookDir);
         body.MoveRotation(rotation);
     }
-    void overground(){
+    void overground()
+    {
         // stop the player from going under the ground
         if (transform.position.y < ResetYThredhold)
         {
@@ -72,5 +77,13 @@ void FixedUpdate()
             transform.position = new Vector3(0, 0.5f, 0);
         }
     }
+    public void SpeedUp(float speedBoostAmount, float speedBoostTime)
+    {
+     // Increase the player's speed by the specified amount.
+        currentSpeed = speed + speedBoostAmount;
 
+        // Start a coroutine to restore the player's speed after the duration has elapsed.
+        StartCoroutine(Re(speedBoostTime));
+        // make next time speedup is called it will be a speed down
+    }
 }

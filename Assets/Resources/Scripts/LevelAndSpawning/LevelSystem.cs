@@ -86,7 +86,7 @@ public class LevelSystem : MonoBehaviour
         int randomSpawnpoint = Random.Range(0, spawnpointPrefabs.Length);
         print("Spawn point" + spawnpointPrefabs[randomSpawnpoint].position);
         Vector3 randomPos = Random.insideUnitSphere * maxSpawnRadius + spawnpointPrefabs[Random.Range(0, spawnpointPrefabs.Length)].position;
-        
+        randomPos.y = 0f;
 
         print(randomPos);
         return randomPos;
