@@ -1,11 +1,11 @@
 using UnityEngine;
 using System.Collections.Generic;
-
+using System.Collections;
 public class EnemyManager : MonoBehaviour
 {
     public static EnemyManager Instance; // Singleton instance of the class
 
-    public Dictionary<int, List<int>> Waves = new Dictionary<int, List<int>>();
+    // public Dictionary<int, List<int>> Waves = new Dictionary<int, List<int>>();
     public List<int> SpawnEnemiesInWave_one = new List<int>() {1, 1, 2, 1, 1 };
     public List<int> SpawnEnemiesInWave_two = new List<int>() { 1, 1, 2, 1, 1, 2, 1, 1 };
 
@@ -32,51 +32,6 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-
-    public void SpawnEnemy(int enemyType)
-    {
-        if (activeEnemies.Count < maxEnemies)
-        {
-            GameObject prefab;
-            switch (enemyType)
-            {
-                case 1:
-                    prefab = Ranger;
-                    break;
-                case 2:
-                    prefab = HighLander;
-                    break;
-                default:
-                    prefab = Ranger;
-                    break;
-            }
-            GameObject enemy = Instantiate(prefab, GetRandomPosition(), Quaternion.identity);
-            activeEnemies.Add(enemy);
-        }
-    }
-    // Spawn an enemy after a delay
-    public IEnumerator<WaitForSeconds> SpawnEnemyAfterDelay(GameObject prefab, float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        if (SpawnEnemiesInWave_one.Count > 0)
-        {
-            int enem = SpawnEnemiesInWave_one[0];
-            SpawnEnemy(enem);
-            SpawnEnemiesInWave_one.RemoveAt(0);
-
-        }
-
-    }
-
-    // Despawn an enemy
-    public void DespawnEnemy(GameObject enemy)
-    {
-        if (activeEnemies.Contains(enemy))
-        {
-            activeEnemies.Remove(enemy);
-            Destroy(enemy);
-        }
-    }
 
     // Get a random position within a circle around the player
     private Vector3 GetRandomPosition()
