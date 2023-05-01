@@ -36,7 +36,7 @@ public class Player : Entity
         if (buff.gameObject.tag == "SpeedUp")
         {
             SpeedUp(2.0f);
-            ShieldRotate(100f);
+            ShieldRotate(30f);
             Task.Delay(TimeSpan.FromSeconds(10)).ContinueWith((a) => SpeedUp(1.0f));
             Task.Delay(TimeSpan.FromSeconds(10)).ContinueWith((b) => ShieldRotate(15f));
         }
