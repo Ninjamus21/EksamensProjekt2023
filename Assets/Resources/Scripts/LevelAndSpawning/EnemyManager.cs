@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+/*
 public class EnemyManager : MonoBehaviour
 {
     public static EnemyManager Instance; // Singleton instance of the class
@@ -50,3 +51,4 @@ public class EnemyManager : MonoBehaviour
     }
 
 }
+*/

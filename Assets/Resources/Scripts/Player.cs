@@ -6,12 +6,14 @@ public class Player : Entity
 {
     public Rigidbody body;
     public Camera cam;
-    public float speed = 20.0f;
+    public float speed = 5.0f;
     public float ResetYThredhold = -0.5f;
     public bool speedup = false;
     public float buff = 1.0f;
     float moveLimiter = 0.7f;
     float currentSpeed;
+    float timeSinceSpeedUp;
+    float speedUpDuration = 10.0f;
     Vector3 movement;
     Vector3 mousePos;
 
@@ -19,12 +21,22 @@ public class Player : Entity
     {
         move();
         moisePos();
+        Duration();
     }
     void FixedUpdate()
     {
         look();
         overground();
         transformMove();
+    }
+     void OntriggerEnter(Collider other)
+    {
+        // if the player collides with a speed up power up
+        if (other.gameObject.CompareTag("SpeedUp"))
+        {
+            speedup = true;
+            SpeedUp(2.0f);
+        }
     }
     void move()
     {
@@ -35,8 +47,8 @@ public class Player : Entity
         // Limit diagonal movement speed stops speed gains when pressing two keys.
         if (horizontal != 0 && vertical != 0)
         {
-            horizontal *= buff * moveLimiter;
-            vertical *= buff * moveLimiter;
+            horizontal *= moveLimiter * buff;
+            vertical *= moveLimiter * buff;
         }
 
         // Set movement vector based on input, its makes the y axis 0 so the player doesn't move up or down
@@ -77,13 +89,30 @@ public class Player : Entity
             transform.position = new Vector3(0, 0.5f, 0);
         }
     }
-    public void SpeedUp(float speedBoostAmount, float speedBoostTime)
+    public void SpeedUp(float speedBoostAmount)
     {
-     // Increase the player's speed by the specified amount.
-        currentSpeed = speed + speedBoostAmount;
+        // Speed up the player
+        if (speedup == true)
+        {
+            buff = speedBoostAmount;
+            
 
-        // Start a coroutine to restore the player's speed after the duration has elapsed.
-        StartCoroutine(Re(speedBoostTime));
-        // make next time speedup is called it will be a speed down
+        } else if (speedup == false)
+        {
+            buff = 1.0f;
+        }
     }
+    private void Duration()
+    {
+        // stop the player from being sped up forever
+        if (speedup)
+        {
+            timeSinceSpeedUp += Time.deltaTime;
+            if (timeSinceSpeedUp >= speedUpDuration)
+            {
+                speedup = false;
+                timeSinceSpeedUp = 0.0f;
+            }
+        }
+    } 
 }

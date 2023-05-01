@@ -128,3 +128,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   time: 2
+  particleEffectHIT: {fileID: 5988355296524666311, guid: 11acd069f2197c1409ed993d29e746ec, type: 3}

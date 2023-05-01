@@ -5,6 +5,7 @@ using UnityEngine;
 public class CounterBullet : MonoBehaviour
 {
     public float time = 5.0f;
+    public ParticleSystem particleEffectHIT;
     
     // Start is called before the first frame update
     void Start()
@@ -19,6 +20,7 @@ public class CounterBullet : MonoBehaviour
     }
     public void OnCollisionEnter(Collision collision){
         if(collision.gameObject.tag == "Ranger"){
+            Instantiate(particleEffectHIT, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }

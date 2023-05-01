@@ -1,16 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelSystem : MonoBehaviour
 {
     public GameObject[] enemyPrefabs; // Array of enemy prefabs to be instantiated
     public float maxSpawnRadius = 10f; // Maximum distance from the spawn point that an enemy can spawn
-    public List<int> SpawnEnemiesInWave_one = new List<int>() { 0, 0, 0, 0, 0 };
-    public List<int> SpawnEnemiesInWave_two = new List<int>() { 1, 1, 2, 1, 1, 2, 1, 1 };
-    public List<int> SpawnEnemiesInWave_three = new List<int>() { 1, 1, 2, 1, 1, 2, 1, 1, 2, 1, 1 };
-    public List<int> SpawnEnemiesInWave_four = new List<int>() { 1, 1, 2, 1, 1, 2, 1, 1, 2, 1, 1 };
+    public List<int> SpawnEnemiesInWave_one = new List<int>() {}; // The number of enemies to spawn in the first wave, make this in the editor
+    public List<int> SpawnEnemiesInWave_two = new List<int>() {}; 
+    public List<int> SpawnEnemiesInWave_three = new List<int>() {};
+    public List<int> SpawnEnemiesInWave_four = new List<int>() {};
+    public List<int> SpawnEnemiesInWave_five = new List<int>() {};
+    public List<int> SpawnEnemiesInWave_six = new List<int>() {};
+    public List<int> SpawnEnemiesInWave_seven = new List<int>() {};
+    public List<int> SpawnEnemiesInWave_eight = new List<int>() {};
+    public List<int> SpawnEnemiesInWave_nine = new List<int>() {};
+    public List<int> SpawnEnemiesInWave_ten = new List<int>() {};
     private int _enemyCounter = 0;
+    private float _spawnTimerSinceLastWave = 0f;
+    private float maxTime = 30f;
+
+    // timer variables
+    public bool timerActive = false;
+    public float timer = 0f;
+    public Text TimerTxt;
     // spawn area variables
     public Transform[] spawnpointPrefabs; // the prefab for the spawnpoints
     public int numberOfSpawnpoints; // how many spawnpoints to create
@@ -40,30 +54,97 @@ public class LevelSystem : MonoBehaviour
             spawnpointPrefabs[i] = spawnpoint.transform;
         }
         _enemyCounter = 0;
+        timerActive = true;
     }
 
 
     void FixedUpdate()
     {
+        _spawnTimerSinceLastWave += Time.deltaTime;
+        updateTimer(timer);
+         if (timerActive == true)
+        {
+             timer += Time.deltaTime;
+        }
+        
         //print(GameObject.FindObjectsOfType<Enemy>().Length);
         //Check how many ememies are alive
         //If none, spawn new wave
-        if (GameObject.FindObjectsOfType<Enemy>().Length == 0)
+        if (GameObject.FindObjectsOfType<Enemy>().Length == 0 || _spawnTimerSinceLastWave >= maxTime)
         {
             // make a delay between spawns;
             if (_enemyCounter == 0)
             {
                 SpawnEnemies(SpawnEnemiesInWave_one);
                 _enemyCounter++;
+                _spawnTimerSinceLastWave = 0f;
             }
             else if (_enemyCounter == 1)
             {
                 SpawnEnemies(SpawnEnemiesInWave_two);
                 _enemyCounter++;
+                _spawnTimerSinceLastWave = 0f;
+            }
+            else if (_enemyCounter == 2)
+            {
+                SpawnEnemies(SpawnEnemiesInWave_three);
+                _enemyCounter++;
+                _spawnTimerSinceLastWave = 0f;
+            }
+            else if (_enemyCounter == 3)
+            {
+                SpawnEnemies(SpawnEnemiesInWave_four);
+                _enemyCounter++;
+                _spawnTimerSinceLastWave = 0f;
+            }
+            else if (_enemyCounter == 4)
+            {
+                SpawnEnemies(SpawnEnemiesInWave_five);
+                _enemyCounter++;
+                _spawnTimerSinceLastWave = 0f;
+            }
+            else if (_enemyCounter == 5)
+            {
+                SpawnEnemies(SpawnEnemiesInWave_six);
+                _enemyCounter++;
+                _spawnTimerSinceLastWave = 0f;
+            }
+            else if (_enemyCounter == 6)
+            {
+                SpawnEnemies(SpawnEnemiesInWave_seven);
+                _enemyCounter++;
+                _spawnTimerSinceLastWave = 0f;
+            }
+            else if (_enemyCounter == 7)
+            {
+                SpawnEnemies(SpawnEnemiesInWave_eight);
+                _enemyCounter++;
+                _spawnTimerSinceLastWave = 0f;
+            }
+            else if (_enemyCounter == 8)
+            {
+                SpawnEnemies(SpawnEnemiesInWave_nine);
+                _enemyCounter++;
+                _spawnTimerSinceLastWave = 0f;
+            }
+            else if (_enemyCounter == 9)
+            {
+                SpawnEnemies(SpawnEnemiesInWave_ten);
+                _enemyCounter++;
+                _spawnTimerSinceLastWave = 0f;
+            }
+            else if (_enemyCounter == 10)
+            {
+                SpawnEnemies(SpawnEnemiesInWave_ten);
+                _enemyCounter++;
+                _spawnTimerSinceLastWave = 0f;
             }
             else
             {
-                Debug.Log("No more waves");
+                Debug.Log("No more waves, now entering endless mode");
+                timerActive = false;
+                // spawn from the last list in a random order
+
             }
         }
     }
@@ -90,5 +171,14 @@ public class LevelSystem : MonoBehaviour
 
         print(randomPos);
         return randomPos;
+    }
+    void updateTimer(float currentime)
+    {
+        currentime += 1;
+
+        float minutes = Mathf.FloorToInt(currentime / 60);
+        float seconds = Mathf.FloorToInt(currentime % 60);
+
+        TimerTxt.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 }

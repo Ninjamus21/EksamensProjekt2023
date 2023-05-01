@@ -26,13 +26,7 @@ public class Buff : MonoBehaviour
     // Check if the collider is the player.
     if (other.CompareTag("Player"))
     {
-        // Apply the speed boost to the player.
-        Player player = other.GetComponent<Player>();
-        if (player != null)
-        {
-            player.ApplySpeedBoost(speedBoostAmount, speedBoostDuration);
-        }
-
+       Destroy(gameObject);
     }
 }
 }
