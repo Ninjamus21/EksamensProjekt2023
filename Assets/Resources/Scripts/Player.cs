@@ -8,12 +8,13 @@ public class Player : Entity
     public Camera cam;
     public float speed = 5.0f;
     public float ResetYThredhold = -0.5f;
+    float moveLimiter = 0.7f;
+    // speed up variables
     public bool speedup = false;
     public float buff = 1.0f;
-    float moveLimiter = 0.7f;
-    float currentSpeed;
-    float timeSinceSpeedUp;
-    float speedUpDuration = 10.0f;
+    public float timeSinceSpeedUp = 1.0f;
+    public float speedUpDuration = 10.0f;
+    public float speedBoostAmount = 2.0f;
     Vector3 movement;
     Vector3 mousePos;
 
@@ -22,6 +23,7 @@ public class Player : Entity
         move();
         moisePos();
         Duration();
+        SpeedUp();
     }
     void FixedUpdate()
     {
@@ -29,13 +31,13 @@ public class Player : Entity
         overground();
         transformMove();
     }
-     void OntriggerEnter(Collider other)
+     void OnCollisionEnter(Collision buff)
     {
         // if the player collides with a speed up power up
-        if (other.gameObject.CompareTag("SpeedUp"))
+        if (buff.gameObject.tag == "SpeedUp")
         {
             speedup = true;
-            SpeedUp(2.0f);
+            SpeedUp();
         }
     }
     void move()
@@ -47,8 +49,8 @@ public class Player : Entity
         // Limit diagonal movement speed stops speed gains when pressing two keys.
         if (horizontal != 0 && vertical != 0)
         {
-            horizontal *= moveLimiter * buff;
-            vertical *= moveLimiter * buff;
+            horizontal *= moveLimiter;
+            vertical *= moveLimiter;
         }
 
         // Set movement vector based on input, its makes the y axis 0 so the player doesn't move up or down
@@ -70,7 +72,7 @@ public class Player : Entity
     void transformMove()
     {
         // Move the rigidbody based on movement vector and run speed
-        body.MovePosition(body.position + movement * speed * Time.fixedDeltaTime);
+        body.MovePosition(body.position + movement * speed * buff * Time.fixedDeltaTime);
     }
     void look()
     {
@@ -89,30 +91,33 @@ public class Player : Entity
             transform.position = new Vector3(0, 0.5f, 0);
         }
     }
-    public void SpeedUp(float speedBoostAmount)
+    public void SpeedUp()
     {
         // Speed up the player
         if (speedup == true)
         {
             buff = speedBoostAmount;
             
-
-        } else if (speedup == false)
+        }
+        else if (speedup == false)
         {
             buff = 1.0f;
         }
     }
-    private void Duration()
+    public void Duration()
     {
         // stop the player from being sped up forever
-        if (speedup)
+        while (speedup == true)
         {
             timeSinceSpeedUp += Time.deltaTime;
-            if (timeSinceSpeedUp >= speedUpDuration)
-            {
-                speedup = false;
-                timeSinceSpeedUp = 0.0f;
-            }
+        } 
+
+        if (timeSinceSpeedUp >= speedUpDuration)
+        {
+            speedup = false;
+            timeSinceSpeedUp = 0.0f;
+            
+        }
         }
     } 
-}
+

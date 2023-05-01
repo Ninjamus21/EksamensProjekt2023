@@ -8,19 +8,57 @@ public class ShieldRotate : MonoBehaviour
     public float distanceFromPlayer = 2f;
     public float rotationSpeed = 5f;
     private Vector3 targetPosition;
+    // boost variables
+    public bool speedup = false;
+    public float buff = 1.0f;
+     float timeSinceSpeedUp;
+    float speedUpDuration = 10.0f;
     void start()
     {
         targetPosition = transform.position;
     }
     void Update()
     {
+        Duration();
         ShieldPosition();
     }
     void FixedUpdate()
     {
         transformMoveShield();
     }
-
+    void OnCollisionEnter(Collision buff)
+    {
+        // if the player collides with a speed up power up
+        if (buff.gameObject.tag == "SpeedUp")
+        {
+            speedup = true;
+            SpeedUp(3.0f);
+        }
+    }
+    public void SpeedUp(float speedBoostAmount)
+    {
+        // Speed up the player
+        if (speedup == true)
+        {
+            buff = speedBoostAmount;
+        } else
+        {
+            buff = 1.0f;
+        }
+    }
+    public void Duration()
+    {
+        // stop the player from being sped up forever
+        if (speedup == true)
+        {
+            timeSinceSpeedUp += Time.deltaTime;
+            if (timeSinceSpeedUp >= speedUpDuration)
+            {
+                speedup = false;
+                timeSinceSpeedUp = 0.0f;
+            }
+        }
+    } 
     void ShieldPosition()
     {
         // Create a ray from the mouse cursor on screen in the direction of the camera
@@ -45,7 +83,7 @@ public class ShieldRotate : MonoBehaviour
     }
     void transformMoveShield()
     {
-        transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * rotationSpeed);
+        transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * rotationSpeed * buff);
     }
 
 }

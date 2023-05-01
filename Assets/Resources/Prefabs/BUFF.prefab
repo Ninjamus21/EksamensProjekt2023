@@ -110,9 +110,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 493ff29742eb9c145946775b4a2c08c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  body: {fileID: 0}
-  cam: {fileID: 0}
-  runSpeed: 20
-  ResetYThredhold: -0.5
-  speedup: 0
-  buff: 1
+  speedBoostAmount: 2
+  speedBoostDuration: 5
+  explosionEffect: {fileID: 5988355296524666311, guid: 5adc983259df89d458a55cd071e95145, type: 3}

@@ -10,6 +10,8 @@ TagManager:
   - ObjectToDespawn
   - Shield
   - Counter Bullet
+  - Buff
+  - SpeedUp
   layers:
   - Default
   - TransparentFX
