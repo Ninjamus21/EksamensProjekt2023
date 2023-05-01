@@ -19,12 +19,6 @@ public class Highlander : Enemy
     {
         throw new System.NotImplementedException();
     }
-
-    public override void Spawn()
-    {
-        throw new System.NotImplementedException();
-    }
-
     public override void TakeDamage(float _damage)
     {
         throw new System.NotImplementedException();

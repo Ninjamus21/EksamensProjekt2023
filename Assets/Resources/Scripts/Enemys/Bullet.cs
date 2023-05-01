@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour
 {
     public GameObject oldObject; // reference to the old object
     public GameObject newObject; // reference to the new object
+    public float velocityMulitplier = 2.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -56,7 +57,7 @@ if (gameObject.tag == "Bullet"){
     GameObject newGameObject = Instantiate(newObject, oldObject.transform.position, oldObject.transform.rotation);
 
     // set the velocity of the new object to match the old object
-    newGameObject.GetComponent<Rigidbody>().velocity = velocity * 2;
+    newGameObject.GetComponent<Rigidbody>().velocity = velocity * velocityMulitplier;
 
     // destroy the old object
     Destroy(oldObject);

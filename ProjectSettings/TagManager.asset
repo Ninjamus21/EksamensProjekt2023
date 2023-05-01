@@ -12,6 +12,7 @@ TagManager:
   - Counter Bullet
   - Buff
   - SpeedUp
+  - Recoil
   layers:
   - Default
   - TransparentFX

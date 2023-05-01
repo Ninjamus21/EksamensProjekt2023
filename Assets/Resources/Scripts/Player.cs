@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,11 +11,11 @@ public class Player : Entity
     public float ResetYThredhold = -0.5f;
     float moveLimiter = 0.7f;
     // speed up variables
-    public bool speedup = false;
     public float buff = 1.0f;
-    public float timeSinceSpeedUp = 1.0f;
-    public float speedUpDuration = 10.0f;
-    public float speedBoostAmount = 2.0f;
+    // recoil variables
+    Bullet bullet = new Bullet();
+    ShieldRotate shield = new ShieldRotate();
+    Ranger ranger = new Ranger();
     Vector3 movement;
     Vector3 mousePos;
 
@@ -22,8 +23,6 @@ public class Player : Entity
     {
         move();
         moisePos();
-        Duration();
-        SpeedUp();
     }
     void FixedUpdate()
     {
@@ -36,10 +35,25 @@ public class Player : Entity
         // if the player collides with a speed up power up
         if (buff.gameObject.tag == "SpeedUp")
         {
-            speedup = true;
-            SpeedUp();
+            SpeedUp(2.0f);
+            ShieldRotate(100f);
+            Task.Delay(TimeSpan.FromSeconds(10)).ContinueWith((a) => SpeedUp(1.0f));
+            Task.Delay(TimeSpan.FromSeconds(10)).ContinueWith((b) => ShieldRotate(15f));
         }
+        // if the player collides with a recoil power up
+        if (buff.gameObject.tag == "Recoil")
+        {
+            bullet.velocityMulitplier = 10.0f;
+            Task.Delay(TimeSpan.FromSeconds(10)).ContinueWith((c) => bullet.velocityMulitplier = 2.0f);
+        }
+        if (buff.gameObject.tag == "Damage")
+        {
+            ranger.TakeDamage(2.0f);
+            Task.Delay(TimeSpan.FromSeconds(10)).ContinueWith((d) => ranger.TakeDamage(1.0f));
+        }
+
     }
+
     void move()
     {
         // Get horizontal and vertical input
@@ -91,33 +105,13 @@ public class Player : Entity
             transform.position = new Vector3(0, 0.5f, 0);
         }
     }
-    public void SpeedUp()
+    public void SpeedUp(float speedBoostAmount)
     {
-        // Speed up the player
-        if (speedup == true)
-        {
-            buff = speedBoostAmount;
-            
-        }
-        else if (speedup == false)
-        {
-            buff = 1.0f;
-        }
+        buff = speedBoostAmount;
     }
-    public void Duration()
+    public void ShieldRotate(float rotationSpeedBoostAmount)
     {
-        // stop the player from being sped up forever
-        while (speedup == true)
-        {
-            timeSinceSpeedUp += Time.deltaTime;
-        } 
-
-        if (timeSinceSpeedUp >= speedUpDuration)
-        {
-            speedup = false;
-            timeSinceSpeedUp = 0.0f;
-            
-        }
-        }
-    } 
-
+        shield.rotationSpeed = rotationSpeedBoostAmount;
+    
+    }
+}
