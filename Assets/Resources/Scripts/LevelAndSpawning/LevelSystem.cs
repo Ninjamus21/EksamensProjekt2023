@@ -31,6 +31,9 @@ public class LevelSystem : MonoBehaviour
     public Vector3 spawnAreaCenter; // the center of the spawn area
     public float spawnAreaWidth; // the width of the spawn area
     public float spawnAreaDepth; // the depth of the spawn area
+    public GameObject buffPrefabRecoil; // the prefab for the buff
+    public GameObject buffPrefabSpeed; // the prefab for the buff
+    public GameObject buffPrefabDamage; // the prefab for the buff
 
 
     void Start()
@@ -84,6 +87,8 @@ public class LevelSystem : MonoBehaviour
                 SpawnEnemies(SpawnEnemiesInWave_two);
                 _enemyCounter++;
                 _spawnTimerSinceLastWave = 0f;
+                SpawnBuffs_Damage();
+
             }
             else if (_enemyCounter == 2)
             {
@@ -172,6 +177,18 @@ public class LevelSystem : MonoBehaviour
         print(randomPos);
         return randomPos;
     }
+    void SpawnBuffs_Damage(){
+        // spawn buff at random spawnpoint
+        Instantiate(buffPrefabDamage, GetRandomPosition(), Quaternion.identity);
+    }
+    void SpawnBuffs_Speed(){
+        // spawn buff at random spawnpoint
+        Instantiate(buffPrefabSpeed, GetRandomPosition(), Quaternion.identity);
+    }
+    void SpawnBuffs_Recoil(){
+        // spawn buff at random spawnpoint
+        Instantiate(buffPrefabRecoil, GetRandomPosition(), Quaternion.identity);
+    }
     void updateTimer(float currentime)
     {
         currentime += 1;
@@ -181,4 +198,5 @@ public class LevelSystem : MonoBehaviour
 
         TimerTxt.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
+
 }
