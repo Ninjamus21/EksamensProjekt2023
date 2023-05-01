@@ -14,19 +14,19 @@ public class Buff : MonoBehaviour
     // The particle effect to play when the box is destroyed.
     public ParticleSystem explosionEffect;
 
-    // The audio clip to play when the box is destroyed.
-    public AudioClip explosionSound;
-    // Start is called before the first frame update
-    // Update is called once per frame
     void Update()
     {
         
     }
-    private void OnTriggerEnter(Collider other) {
-    // Check if the collider is the player.
-    if (other.CompareTag("Player"))
+    public void OnCollisionEnter(Collision buff){
+    // destroy the box if it collides with a the player or the shield
+    if (buff.gameObject.tag == "Player" || buff.gameObject.tag == "Shield")
     {
-       Destroy(gameObject);
+        // Instantiate the explosion effect and destroy the particle system when its duration is up.
+        Instantiate(explosionEffect, transform.position, Quaternion.identity);
+        Destroy(gameObject);
     }
+    }
+   
 }
-}
+
