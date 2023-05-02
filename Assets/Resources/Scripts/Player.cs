@@ -13,11 +13,13 @@ public class Player : Entity
     // speed up variables
     public float buff = 1.0f;
     // recoil variables
-    Bullet bullet = new Bullet();
-    ShieldRotate shield = new ShieldRotate();
-    Ranger ranger = new Ranger();
     Vector3 movement;
     Vector3 mousePos;
+
+    // damage variables
+    public bool IsBuffedDamage = false;
+    public bool IsBuffedSpeedShield = false;
+    public bool IsBuffedRecoil = false;
 
     void Update()
     {
@@ -36,20 +38,20 @@ public class Player : Entity
         if (buff.gameObject.tag == "SpeedUp")
         {
             SpeedUp(2.0f);
-            ShieldRotate(30f);
+            IsBuffedSpeedShield = true;
             Task.Delay(TimeSpan.FromSeconds(10)).ContinueWith((a) => SpeedUp(1.0f));
-            Task.Delay(TimeSpan.FromSeconds(10)).ContinueWith((b) => ShieldRotate(15f));
-        }
-        // if the player collides with a recoil power up
-        if (buff.gameObject.tag == "Recoil")
-        {
-            bullet.velocityMulitplier = 10.0f;
-            Task.Delay(TimeSpan.FromSeconds(10)).ContinueWith((c) => bullet.velocityMulitplier = 2.0f);
+            Task.Delay(TimeSpan.FromSeconds(10)).ContinueWith((a) => IsBuffedSpeedShield = false);
+
         }
         if (buff.gameObject.tag == "Damage")
         {
-            ranger.TakeDamage(2.0f);
-            Task.Delay(TimeSpan.FromSeconds(10)).ContinueWith((d) => ranger.TakeDamage(1.0f));
+            IsBuffedDamage = true;
+            Task.Delay(TimeSpan.FromSeconds(10)).ContinueWith((a) => IsBuffedDamage = false);
+        }
+        if (buff.gameObject.tag == "Recoil")
+        {
+            IsBuffedRecoil = true;
+            Task.Delay(TimeSpan.FromSeconds(10)).ContinueWith((a) => IsBuffedRecoil = false);
         }
 
     }
@@ -108,10 +110,5 @@ public class Player : Entity
     public void SpeedUp(float speedBoostAmount)
     {
         buff = speedBoostAmount;
-    }
-    public void ShieldRotate(float rotationSpeedBoostAmount)
-    {
-        shield.rotationSpeed = rotationSpeedBoostAmount;
-    
     }
 }

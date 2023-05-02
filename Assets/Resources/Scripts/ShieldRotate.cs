@@ -9,9 +9,12 @@ public class ShieldRotate : MonoBehaviour
     public float rotationSpeed = 5f;
     private Vector3 targetPosition;
     public float buff = 3f;
+    
     void start()
     {
         targetPosition = transform.position;
+        
+        
     }
     void Update()
     {
@@ -45,6 +48,17 @@ public class ShieldRotate : MonoBehaviour
     }
     void transformMoveShield()
     {
+        SpeedShield();
         transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * rotationSpeed);
+    }
+
+    void SpeedShield()
+    {
+        if (player.GetComponent<Player>().IsBuffedSpeedShield == true)
+        {
+            rotationSpeed *= buff;
+        } else {
+            rotationSpeed = 5f;
+        }
     }
 }

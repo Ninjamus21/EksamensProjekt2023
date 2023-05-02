@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class Ranger : Enemy
 {
-    
+
     public Transform player;
     public GameObject bulletPrefab;
     public float fireRate = 10.0f;
@@ -23,7 +23,7 @@ public class Ranger : Enemy
         navAgent = GetComponent<NavMeshAgent>();
         health = 2;
         damage = 1;
-        
+
         //Find player
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
@@ -67,7 +67,7 @@ public class Ranger : Enemy
         {
             Instantiate(particleEffect, transform.position, Quaternion.identity);
             die();
-            
+
         }
     }
 
@@ -85,11 +85,13 @@ public class Ranger : Enemy
         if (collision.gameObject.tag == "Counter Bullet")
         {
             TakeDamage(damage);
-
-            
+        }
+        else if (collision.gameObject.tag == "2x bullet")
+        {
+            TakeDamage(damage * 2);
         }
     }
 }
 
 
-       
+

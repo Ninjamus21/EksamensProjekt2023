@@ -81,6 +81,9 @@ public class LevelSystem : MonoBehaviour
                 SpawnEnemies(SpawnEnemiesInWave_one);
                 _enemyCounter++;
                 _spawnTimerSinceLastWave = 0f;
+                SpawnBuffs_Recoil();
+                SpawnBuffs_Damage();
+                SpawnBuffs_Speed();
             }
             else if (_enemyCounter == 1)
             {
@@ -95,12 +98,17 @@ public class LevelSystem : MonoBehaviour
                 SpawnEnemies(SpawnEnemiesInWave_three);
                 _enemyCounter++;
                 _spawnTimerSinceLastWave = 0f;
+                SpawnBuffs_Speed();
+                SpawnBuffs_Recoil();
             }
             else if (_enemyCounter == 3)
             {
                 SpawnEnemies(SpawnEnemiesInWave_four);
                 _enemyCounter++;
                 _spawnTimerSinceLastWave = 0f;
+                SpawnBuffs_Damage();
+                SpawnBuffs_Recoil();
+                SpawnBuffs_Speed();
             }
             else if (_enemyCounter == 4)
             {

@@ -113,6 +113,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   oldObject: {fileID: 5731518780810466150}
   newObject: {fileID: 5731518780810466150, guid: 35168531f854ea8498c95a879be4dd3e, type: 3}
+  velocityMulitplier: 2
+  player: {fileID: 1714403149162173088, guid: e196c0da023b0394a87e547d7d9e79c8, type: 3}
 --- !u!54 &6585109089927988443
 Rigidbody:
   m_ObjectHideFlags: 0

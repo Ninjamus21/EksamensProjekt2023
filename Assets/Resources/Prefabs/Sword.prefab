@@ -46,10 +46,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95b26a193248f6746a7a37c82f564d7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetEnemy: {fileID: 2954369941151518758, guid: 420cbc18c8737c242a2a5fc22647beab, type: 3}
-  offset: 1
-  rotationSpeed: 100
-  followSpeed: 5
 --- !u!54 &2291631549975139663
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -91,9 +87,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3361008777858423685}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.007896256, y: 0.78306735, z: -0.009944078, w: 0.62180734}
+  m_LocalPosition: {x: -12.949577, y: 0, z: 9.431429}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 442371155137094324}
@@ -112,10 +108,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95b26a193248f6746a7a37c82f564d7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetEnemy: {fileID: 6226409471511247744, guid: 420cbc18c8737c242a2a5fc22647beab, type: 3}
-  offset: 1
-  rotationSpeed: 100
-  followSpeed: 5
 --- !u!54 &6499722252915034938
 Rigidbody:
   m_ObjectHideFlags: 0

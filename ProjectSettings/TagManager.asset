@@ -3,7 +3,15 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Ranger
+  - Recoil
+  - SpeedUp
+  - Bullet
+  - Counter Bullet
+  - Shield
+  - Damage
+  - 2x bullet
   layers:
   - Default
   - TransparentFX

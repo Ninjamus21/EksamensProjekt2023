@@ -7,11 +7,12 @@ public class Bullet : MonoBehaviour
     public GameObject oldObject; // reference to the old object
     public GameObject newObject; // reference to the new object
     public float velocityMulitplier = 2.0f;
-
+    public GameObject player;
+    public float buff = 2.0f;
     // Start is called before the first frame update
     void Start()
     {
-       
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
@@ -32,12 +33,12 @@ public class Bullet : MonoBehaviour
         }
         else if (collision.gameObject.tag == "Player")
         {
-            
+
             Destroy(gameObject);
         }
         else if (collision.gameObject.tag == "Counter Bullet")
         {
-            
+
         }
         else
         {
@@ -46,21 +47,31 @@ public class Bullet : MonoBehaviour
         }
     }
 
-void ChangeObject()
-{
-if (gameObject.tag == "Bullet"){
+    void ChangeObject()
+    {
+        if (gameObject.tag == "Bullet")
+        {
 
-    // get the velocity of the old object
-    Vector3 velocity = oldObject.GetComponent<Rigidbody>().velocity;
+            // get the velocity of the old object
+            Vector3 velocity = oldObject.GetComponent<Rigidbody>().velocity;
 
-    // create a new instance of the new object
-    GameObject newGameObject = Instantiate(newObject, oldObject.transform.position, oldObject.transform.rotation);
+            // create a new instance of the new object
+            GameObject newGameObject = Instantiate(newObject, oldObject.transform.position, oldObject.transform.rotation);
+            // buff conditions for the bullet damage
+            if (player.GetComponent<Player>().IsBuffedDamage) newGameObject.tag = "2x bullet";
 
-    // set the velocity of the new object to match the old object
-    newGameObject.GetComponent<Rigidbody>().velocity = velocity * velocityMulitplier;
+            // buff conditions for the bullet speed recoil
+            if (player.GetComponent<Player>().IsBuffedRecoil)
+            { 
+            velocityMulitplier *= buff;
+            } else {
+            velocityMulitplier = 2.0f;
+            }
+            // set the velocity of the new object to match the old object
+            newGameObject.GetComponent<Rigidbody>().velocity = velocity * velocityMulitplier;
 
-    // destroy the old object
-    Destroy(oldObject);
-}
-}
+            // destroy the old object
+            Destroy(oldObject);
+        }
+    }
 }
