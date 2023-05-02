@@ -3,17 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Enemy
-  - Ranger
-  - Bullet
-  - ObjectToDespawn
-  - Shield
-  - Counter Bullet
-  - Buff
-  - SpeedUp
-  - Recoil
-  - Damage
+  tags: []
   layers:
   - Default
   - TransparentFX
