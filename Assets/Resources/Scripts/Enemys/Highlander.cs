@@ -14,14 +14,16 @@ public class Highlander : Enemy
     public float swordDistance = 2f;
     private NavMeshAgent navAgent;
     public float fixedYPosition = 0.5f;
+    public ParticleSystem particleEffect;
 
     void Start()
     {
         InstantiantedSword = Instantiate(sword);
         targetPosition = transform.position;
+
         // Set the position of the sword to be a certain distance away from the highlander
         InstantiantedSword.transform.position = transform.position + transform.forward * swordDistance;
-        
+
         navAgent = GetComponent<NavMeshAgent>();
         health = 3;
         damage = 1;
@@ -33,6 +35,17 @@ public class Highlander : Enemy
     {
         InstantiantedSword.transform.RotateAround(transform.position, Vector3.up, swingSpeed * Time.deltaTime);
         Attack();
+        Move();
+    }
+    void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            // Instantiate the explosion effect and destroy the particle system when its duration is up.
+            Instantiate(particleEffect, transform.position, Quaternion.identity);
+            takeDamage(1);
+            
+        }
     }
     public override void Attack()
     {
@@ -50,7 +63,7 @@ public class Highlander : Enemy
 
     public override void Move()
     {
-         if (navAgent != null && navAgent.isActiveAndEnabled)
+        if (navAgent != null && navAgent.isActiveAndEnabled)
         {
             Vector3 targetPosition = new Vector3(player.position.x, fixedYPosition, player.position.z);
             navAgent.SetDestination(targetPosition);
