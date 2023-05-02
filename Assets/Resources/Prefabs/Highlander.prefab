@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 5488953134772968949}
   - component: {fileID: 6846200745386375008}
   - component: {fileID: 4638084458094830705}
+  - component: {fileID: 6851870105151677667}
+  - component: {fileID: 8100032048707680281}
   m_Layer: 0
   m_Name: Highlander
   m_TagString: Untagged
@@ -111,4 +113,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29c6174284aff004c8915144dbb9d3ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  swingSpeed: 2.5
   sword: {fileID: 3361008777858423685, guid: 15676ed9c14b1c84ea8f44574c2f377d, type: 3}
+  InstantiantedSword: {fileID: 0}
+  player: {fileID: 0}
+  swordDistance: 2
+  fixedYPosition: 0.5
+  particleEffectDie: {fileID: 8601737758111705485, guid: 30ffcaf863129934bb0ff4a151cfee6e, type: 3}
+  particleEffectHit: {fileID: 5988355296524666311, guid: 3499d0aac08dd1e41a48f752ac037589, type: 3}
+--- !u!54 &6851870105151677667
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2954369941151518758}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 36
+  m_CollisionDetection: 0
+--- !u!195 &8100032048707680281
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2954369941151518758}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5000001
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 1
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4

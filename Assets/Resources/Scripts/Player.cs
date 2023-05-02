@@ -32,10 +32,10 @@ public class Player : Entity
         overground();
         transformMove();
     }
-     void OnCollisionEnter(Collision buff)
+     void OnCollisionEnter(Collision PlayerCOL)
     {
         // if the player collides with a speed up power up
-        if (buff.gameObject.tag == "SpeedUp")
+        if (PlayerCOL.gameObject.tag == "SpeedUp")
         {
             SpeedUp(2.0f);
             IsBuffedSpeedShield = true;
@@ -43,17 +43,18 @@ public class Player : Entity
             Task.Delay(TimeSpan.FromSeconds(10)).ContinueWith((a) => IsBuffedSpeedShield = false);
 
         }
-        if (buff.gameObject.tag == "Damage")
+        if (PlayerCOL.gameObject.tag == "Damage")
         {
             IsBuffedDamage = true;
             Task.Delay(TimeSpan.FromSeconds(10)).ContinueWith((a) => IsBuffedDamage = false);
         }
-        if (buff.gameObject.tag == "Recoil")
+        if (PlayerCOL.gameObject.tag == "Recoil")
         {
             IsBuffedRecoil = true;
             Task.Delay(TimeSpan.FromSeconds(10)).ContinueWith((a) => IsBuffedRecoil = false);
         }
-
+        // damage system for the player
+        
     }
 
     void move()

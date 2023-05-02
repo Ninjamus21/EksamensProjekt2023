@@ -58,12 +58,16 @@ public class Bullet : MonoBehaviour
             // create a new instance of the new object
             GameObject newGameObject = Instantiate(newObject, oldObject.transform.position, oldObject.transform.rotation);
             // buff conditions for the bullet damage
-            if (player.GetComponent<Player>().IsBuffedDamage) newGameObject.tag = "2x bullet";
-
+            if (player.GetComponent<Player>().IsBuffedDamage) 
+            {
+                newGameObject.tag = "2x bullet";
+            }
+        
             // buff conditions for the bullet speed recoil
             if (player.GetComponent<Player>().IsBuffedRecoil)
             { 
             velocityMulitplier *= buff;
+            newGameObject = Instantiate(newObject, oldObject.transform.position, oldObject.transform.rotation);
             } else {
             velocityMulitplier = 2.0f;
             }
