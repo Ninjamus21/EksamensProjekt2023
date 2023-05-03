@@ -12,6 +12,7 @@ TagManager:
   - Shield
   - Damage
   - 2x bullet
+  - Sword
   layers:
   - Default
   - TransparentFX

@@ -10,21 +10,33 @@ public class Player : Entity
     public float speed = 5.0f;
     public float ResetYThredhold = -0.5f;
     float moveLimiter = 0.7f;
+    private DateTime lastCallTime; // make sure the sword cant hit twice in a row
+    public ParticleSystem particleEffectHit;
     // speed up variables
     public float buff = 1.0f;
     // recoil variables
     Vector3 movement;
     Vector3 mousePos;
+    // material variables
+    public Material[] materials;
+    public Renderer rend;
 
     // damage variables
     public bool IsBuffedDamage = false;
     public bool IsBuffedSpeedShield = false;
     public bool IsBuffedRecoil = false;
 
+    void Start()
+    {
+        health = 3;
+        damage = 1;
+        rend = GetComponent<Renderer>();
+    }
     void Update()
     {
         move();
         moisePos();
+        HpChange();
     }
     void FixedUpdate()
     {
@@ -54,7 +66,15 @@ public class Player : Entity
             Task.Delay(TimeSpan.FromSeconds(10)).ContinueWith((a) => IsBuffedRecoil = false);
         }
         // damage system for the player
-        
+        if (PlayerCOL.gameObject.tag == "Bullet")
+        {
+            takeDamage(1);
+            Instantiate(particleEffectHit, transform.position, Quaternion.identity);
+        }
+        if (PlayerCOL.gameObject.tag == "Sword")
+        {
+            Cooldown();
+        }
     }
 
     void move()
@@ -111,5 +131,35 @@ public class Player : Entity
     public void SpeedUp(float speedBoostAmount)
     {
         buff = speedBoostAmount;
+    }
+    public void Cooldown()
+    {
+    TimeSpan timeSinceLastCall = DateTime.Now - lastCallTime;
+    if (timeSinceLastCall.TotalSeconds < 1.5)
+    {
+        // Script has been called too soon, exit the method
+        return;
+    }
+    // Script logic
+    takeDamage(1);
+    Instantiate(particleEffectHit, transform.position, Quaternion.identity);
+
+    // Update the last call time to the current time
+    lastCallTime = DateTime.Now;
+
+    }
+    public void HpChange(){
+        if (health == 3)
+        {
+            rend.sharedMaterial = materials[0];
+        }
+        if (health == 2)
+        {
+            rend.sharedMaterial = materials[1];
+        }
+        if (health == 1)
+        {
+            rend.sharedMaterial = materials[2];
+        }
     }
 }

@@ -11,7 +11,6 @@ public class Highlander : Enemy
     public GameObject sword; // Reference to the sword GameObject
     public GameObject InstantiantedSword;
     public Transform player; // Reference to the player GameObject
-    private bool isSwinging = false; // Flag for tracking whether the highlander is currently swinging the sword
     private Vector3 targetPosition; // The position that the highlander is moving towards
     public float swordDistance = 2f;
     private NavMeshAgent navAgent;
@@ -102,7 +101,6 @@ public class Highlander : Enemy
 
         }
     }
-
     public override void track()
     {
         throw new System.NotImplementedException();
