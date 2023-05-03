@@ -1,0 +1,42 @@
+@startuml Scoresystem
+class Player {
+    -int health
+    -int score
+    -int ammo
+    -float speed
+    +void Shoot()
+    +void Reload()
+    +void TakeDamage(int damageAmount)
+    +void AddScore(int points)
+}
+
+class Enemy {
+    -int health
+    -int damage
+    -int EnemyType
+    +void TakeDamage(int damageAmount)
+    +void Die()
+}
+
+class GameManager {
+    -Player PlayerName
+    -Enemy EnemyType
+    -ScoreManager scoreManager
+    +void StartGame()
+
+}
+
+class ScoreManager {
+    -int highScoreCount
+    -List<int> highScores
+    -int currentScore
+    +void UpdateScore(int points)
+    +void SaveScore()
+}
+
+Player --> Enemy : Shoot()
+Player --> Enemy : TakeDamage(damageAmount)
+Player --> ScoreManager : AddScore(points)
+Enemy --> ScoreManager : UpdateScore(points)
+
+@enduml

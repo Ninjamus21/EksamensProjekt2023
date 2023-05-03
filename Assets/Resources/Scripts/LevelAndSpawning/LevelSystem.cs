@@ -34,7 +34,7 @@ public class LevelSystem : MonoBehaviour
     public GameObject buffPrefabRecoil; // the prefab for the buff
     public GameObject buffPrefabSpeed; // the prefab for the buff
     public GameObject buffPrefabDamage; // the prefab for the buff
-
+    public GameObject buffPrefabHealth; // the prefab for the buff
 
     void Start()
     {
@@ -84,6 +84,8 @@ public class LevelSystem : MonoBehaviour
                 SpawnBuffs_Recoil();
                 SpawnBuffs_Damage();
                 SpawnBuffs_Speed();
+                SpawnBuffs_Health();
+                SpawnBuffs_Health();
             }
             else if (_enemyCounter == 1)
             {
@@ -91,7 +93,10 @@ public class LevelSystem : MonoBehaviour
                 _enemyCounter++;
                 _spawnTimerSinceLastWave = 0f;
                 SpawnBuffs_Damage();
-
+                SpawnBuffs_Recoil();
+                SpawnBuffs_Damage();
+                SpawnBuffs_Speed();
+                SpawnBuffs_Health();
             }
             else if (_enemyCounter == 2)
             {
@@ -100,6 +105,8 @@ public class LevelSystem : MonoBehaviour
                 _spawnTimerSinceLastWave = 0f;
                 SpawnBuffs_Speed();
                 SpawnBuffs_Recoil();
+                SpawnBuffs_Health();
+                SpawnBuffs_Health();
             }
             else if (_enemyCounter == 3)
             {
@@ -109,48 +116,84 @@ public class LevelSystem : MonoBehaviour
                 SpawnBuffs_Damage();
                 SpawnBuffs_Recoil();
                 SpawnBuffs_Speed();
+                SpawnBuffs_Health();
             }
             else if (_enemyCounter == 4)
             {
                 SpawnEnemies(SpawnEnemiesInWave_five);
                 _enemyCounter++;
                 _spawnTimerSinceLastWave = 0f;
+                SpawnBuffs_Recoil();
+                SpawnBuffs_Damage();
+                SpawnBuffs_Speed();
+                SpawnBuffs_Health();
+                SpawnBuffs_Health();
             }
             else if (_enemyCounter == 5)
             {
                 SpawnEnemies(SpawnEnemiesInWave_six);
                 _enemyCounter++;
                 _spawnTimerSinceLastWave = 0f;
+                SpawnBuffs_Recoil();
+                SpawnBuffs_Damage();
+                SpawnBuffs_Speed();
+                SpawnBuffs_Health();
+                SpawnBuffs_Health();
             }
             else if (_enemyCounter == 6)
             {
                 SpawnEnemies(SpawnEnemiesInWave_seven);
                 _enemyCounter++;
                 _spawnTimerSinceLastWave = 0f;
+                SpawnBuffs_Recoil();
+                SpawnBuffs_Damage();
+                SpawnBuffs_Speed();
+                SpawnBuffs_Health();
             }
             else if (_enemyCounter == 7)
             {
                 SpawnEnemies(SpawnEnemiesInWave_eight);
                 _enemyCounter++;
                 _spawnTimerSinceLastWave = 0f;
+                SpawnBuffs_Recoil();
+                SpawnBuffs_Damage();
+                SpawnBuffs_Speed();
+                SpawnBuffs_Health();
+                SpawnBuffs_Health();
             }
             else if (_enemyCounter == 8)
             {
                 SpawnEnemies(SpawnEnemiesInWave_nine);
                 _enemyCounter++;
                 _spawnTimerSinceLastWave = 0f;
+                SpawnBuffs_Recoil();
+                SpawnBuffs_Damage();
+                SpawnBuffs_Speed();
+                SpawnBuffs_Health();
+                SpawnBuffs_Health();
             }
             else if (_enemyCounter == 9)
             {
                 SpawnEnemies(SpawnEnemiesInWave_ten);
                 _enemyCounter++;
                 _spawnTimerSinceLastWave = 0f;
+                SpawnBuffs_Recoil();
+                SpawnBuffs_Damage();
+                SpawnBuffs_Speed();
+
+                SpawnBuffs_Health();
             }
             else if (_enemyCounter == 10)
             {
                 SpawnEnemies(SpawnEnemiesInWave_ten);
                 _enemyCounter++;
                 _spawnTimerSinceLastWave = 0f;
+                SpawnBuffs_Recoil();
+                SpawnBuffs_Damage();
+                SpawnBuffs_Speed();
+                SpawnBuffs_Health();
+                SpawnBuffs_Health();
+                SpawnBuffs_Health();
             }
             else
             {
@@ -197,6 +240,10 @@ public class LevelSystem : MonoBehaviour
         // spawn buff at random spawnpoint
         Instantiate(buffPrefabRecoil, GetRandomPosition(), Quaternion.identity);
     }
+    void SpawnBuffs_Health(){
+        // spawn heal at random spawnpoint
+        Instantiate(buffPrefabHealth, GetRandomPosition(), Quaternion.identity);
+    }
     void updateTimer(float currentime)
     {
         currentime += 1;
@@ -206,5 +253,4 @@ public class LevelSystem : MonoBehaviour
 
         TimerTxt.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
-
 }

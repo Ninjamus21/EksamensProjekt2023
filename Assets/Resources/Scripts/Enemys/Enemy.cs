@@ -20,6 +20,6 @@ abstract public class Enemy : Entity
     public abstract void Attack();
     public abstract void track();
     public abstract void Move();
-    public abstract void TakeDamage(float _damage);
+    public new abstract void TakeDamage(float _damage);
     public abstract void Cooldown();
 }

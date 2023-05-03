@@ -7,7 +7,7 @@ public abstract class Entity : MonoBehaviour
 {
     public float health;
     protected float damage;
-    protected void takeDamage(float _damage)
+    protected void TakeDamage(float _damage)
     {
         health -= _damage;
         if(health <= 0 && gameObject.tag != "Player")

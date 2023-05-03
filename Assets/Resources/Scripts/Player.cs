@@ -65,10 +65,18 @@ public class Player : Entity
             IsBuffedRecoil = true;
             Task.Delay(TimeSpan.FromSeconds(10)).ContinueWith((a) => IsBuffedRecoil = false);
         }
+        if (PlayerCOL.gameObject.tag == "Heal")
+        {
+            if (health < 3){
+            health += 1;
+            } else {
+                health = 4;
+            }
+        }
         // damage system for the player
         if (PlayerCOL.gameObject.tag == "Bullet")
         {
-            takeDamage(1);
+            TakeDamage(1);
             Instantiate(particleEffectHit, transform.position, Quaternion.identity);
         }
         if (PlayerCOL.gameObject.tag == "Sword")
@@ -141,7 +149,7 @@ public class Player : Entity
         return;
     }
     // Script logic
-    takeDamage(1);
+    TakeDamage(1);
     Instantiate(particleEffectHit, transform.position, Quaternion.identity);
 
     // Update the last call time to the current time
@@ -160,6 +168,13 @@ public class Player : Entity
         if (health == 1)
         {
             rend.sharedMaterial = materials[2];
+        }
+        if (health == 4)
+        {
+            rend.sharedMaterial = materials[3];
+            if (health == 4){
+                Task.Delay(TimeSpan.FromSeconds(5)).ContinueWith((d) => health = 3);
+            }
         }
     }
 }

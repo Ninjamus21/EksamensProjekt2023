@@ -29,7 +29,6 @@ public class Highlander : Enemy
 
         navAgent = GetComponent<NavMeshAgent>();
         health = 3;
-        damage = 1;
 
         //Find player
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -43,12 +42,12 @@ public class Highlander : Enemy
     {
         if (other.gameObject.tag == "Player" || other.gameObject.tag == "Counter Bullet" || other.gameObject.tag == "Shield")
         {
-            // ensure that the sword cant hit the Highlander multiple times, and make particle effect ^^
+            // ensure that the shield cant hit the Highlander multiple times, and make particle effect ^^
             Cooldown();
         } else if (other.gameObject.tag == "2x bullet")
         {
             // take damage and make particle effect, this is legal since the highlander cant be hit multiple times by the 2x bullet
-            takeDamage(2);
+            TakeDamage(2);
             Instantiate(particleEffectHit, transform.position, Quaternion.identity);
         }
 
@@ -75,7 +74,7 @@ public class Highlander : Enemy
         return;
     }
     // Script logic
-    takeDamage(1);
+    TakeDamage(1);
     Instantiate(particleEffectHit, transform.position, Quaternion.identity);
 
     // Update the last call time to the current time
@@ -97,8 +96,9 @@ public class Highlander : Enemy
         if (health <= 0)
         {
             Instantiate(particleEffectDie, transform.position, Quaternion.identity);
+            // destroy the sword when the highlander dies
+            Destroy(InstantiantedSword);
             die();
-
         }
     }
     public override void track()
