@@ -11,6 +11,7 @@ public class Spawner : Enemy
     private DateTime lastCallTime2;
     public GameObject particleEffectHit;
     public GameObject particleEffectDie;
+    public GameObject Spawnling;
     public GameObject InstiatedSpawnling;
     public Transform player;
     private NavMeshAgent navAgent;
@@ -65,13 +66,13 @@ public class Spawner : Enemy
     }
     // Script logic
 
-    InstiatedSpawnling.transform.position = transform.position + transform.right * spawnling_distance;
-    Instantiate(InstiatedSpawnling);
-    activeSpawnlings.Add(InstiatedSpawnling);
+    Spawnling.transform.position = transform.position + transform.right * spawnling_distance;
+    InstiatedSpawnling = Instantiate(Spawnling);
+    activeSpawnlings.Add(Spawnling);
 
-    InstiatedSpawnling.transform.position = transform.position + transform.right *- spawnling_distance;
-    Instantiate(InstiatedSpawnling);
-    activeSpawnlings.Add(InstiatedSpawnling);
+    Spawnling.transform.position = transform.position + transform.right *- spawnling_distance;
+    InstiatedSpawnling = Instantiate(Spawnling);
+    activeSpawnlings.Add(Spawnling);
 
     // Update the last call time to the current time
     lastCallTime2 = DateTime.Now;
@@ -109,7 +110,7 @@ public class Spawner : Enemy
         if (health <= 0)
         {
             Instantiate(particleEffectDie, transform.position, Quaternion.identity);
-            SpawnerisAlive = false;
+            Destroy(InstiatedSpawnling);
             die();
         }
     }

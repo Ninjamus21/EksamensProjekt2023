@@ -25,6 +25,7 @@ public class LevelSystem : MonoBehaviour
     public bool timerActive = false;
     public float timer = 0f;
     public Text TimerTxt;
+    public Text LevelTxt;
     // spawn area variables
     public Transform[] spawnpointPrefabs; // the prefab for the spawnpoints
     public int numberOfSpawnpoints; // how many spawnpoints to create
@@ -61,7 +62,7 @@ public class LevelSystem : MonoBehaviour
     }
 
 
-    void FixedUpdate()
+    void Update()
     {
         _spawnTimerSinceLastWave += Time.deltaTime;
         updateTimer(timer);
@@ -203,6 +204,7 @@ public class LevelSystem : MonoBehaviour
 
             }
         }
+        Level();
     }
 
     void SpawnEnemies(List<int> wave)
@@ -252,5 +254,9 @@ public class LevelSystem : MonoBehaviour
         float seconds = Mathf.FloorToInt(currentime % 60);
 
         TimerTxt.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
+    void Level(){
+        int level = _enemyCounter + 1;
+        LevelTxt.text = string.Format("Level: {0}", level);
     }
 }

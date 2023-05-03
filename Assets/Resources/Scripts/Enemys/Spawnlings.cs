@@ -5,7 +5,7 @@ using UnityEngine;
 public class Spawnlings : MonoBehaviour
 {
     public Transform target;
-    public Transform spawner;
+    public GameObject spawner;
     public float speed = 10f;
     public float rotateSpeed = 5f;
     public float drag = 1f;
@@ -17,7 +17,7 @@ public class Spawnlings : MonoBehaviour
     {
         // Set the target to the player
         target = GameObject.FindGameObjectWithTag("Player").transform;
-        spawner = GameObject.FindGameObjectWithTag("Spawner").transform;
+        spawner = GameObject.FindGameObjectWithTag("Spawner");
 
     }
     void Update () 
@@ -26,13 +26,19 @@ public class Spawnlings : MonoBehaviour
         movemento();
     }
     void OnCollisionEnter (Collision col){
-        if(col.gameObject.tag == "Player"){
-
+        if(col.gameObject.tag == "Player" || col.gameObject.tag == "Shield" || col.gameObject.tag == "Counter Bullet" || col.gameObject.tag == "2x bullet"){
+            Destroy(gameObject);
         }
     }
     public void NuStopperDet()
     {
-
+        /*
+        if (spawner.GetComponent<Spawner>().SpawnerisAlive)
+        {
+            Destroy(gameObject);
+        }
+        */
+        
     }
     public void movemento(){
         // Calculate the direction to the target
