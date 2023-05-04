@@ -1386,6 +1386,10 @@ PrefabInstance:
       propertyPath: player_object
       value: 
       objectReference: {fileID: 1714403149162173088, guid: e196c0da023b0394a87e547d7d9e79c8, type: 3}
+    - target: {fileID: 234417012290618921, guid: 58a027700360a0d469379f181d8f0aac, type: 3}
+      propertyPath: rotationSpeed
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 2629912598341785186, guid: 58a027700360a0d469379f181d8f0aac, type: 3}
       propertyPath: m_Name
       value: Shield
@@ -3377,6 +3381,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 682921486}
+  - component: {fileID: 682921487}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -3400,6 +3405,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &682921487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 682921485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21b3887d27d60e2428a6e95d6c5f2d4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &700162002
 GameObject:
   m_ObjectHideFlags: 0

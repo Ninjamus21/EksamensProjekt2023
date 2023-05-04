@@ -24,6 +24,13 @@ public class ShieldRotate : MonoBehaviour
     {
         transformMoveShield();
     }
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "SpeedUp")
+        {
+            SpeedShield();
+        }
+    }
     void ShieldPosition()
     {
         // Create a ray from the mouse cursor on screen in the direction of the camera
@@ -48,17 +55,16 @@ public class ShieldRotate : MonoBehaviour
     }
     void transformMoveShield()
     {
-        SpeedShield();
         transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * rotationSpeed);
     }
 
-    void SpeedShield()
+    public void SpeedShield()
     {
         if (player.GetComponent<Player>().IsBuffedSpeedShield == true)
         {
             rotationSpeed *= buff;
         } else {
-            rotationSpeed = 5f;
+            rotationSpeed = 15f;
         }
     }
 }
