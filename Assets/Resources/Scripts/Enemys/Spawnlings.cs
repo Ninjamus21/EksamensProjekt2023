@@ -22,23 +22,12 @@ public class Spawnlings : MonoBehaviour
     }
     void Update () 
     {
-        NuStopperDet();
         movemento();
     }
     void OnCollisionEnter (Collision col){
         if(col.gameObject.tag == "Player" || col.gameObject.tag == "Shield" || col.gameObject.tag == "Counter Bullet" || col.gameObject.tag == "2x bullet" || col.gameObject.tag == "Bullet"){
             Destroy(gameObject);
         }
-    }
-    public void NuStopperDet()
-    {
-        /*
-        if (spawner.GetComponent<Spawner>().SpawnerisAlive)
-        {
-            Destroy(gameObject);
-        }
-        */
-        
     }
     public void movemento(){
         // Calculate the direction to the target
