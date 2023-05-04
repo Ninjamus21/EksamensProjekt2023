@@ -40,7 +40,7 @@ public class Highlander : Enemy
     }
     void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "Player" || other.gameObject.tag == "Counter Bullet" || other.gameObject.tag == "Shield")
+        if (other.gameObject.tag == "Player" || other.gameObject.tag == "Shield")
         {
             // ensure that the shield cant hit the Highlander multiple times, and make particle effect ^^
             Cooldown();
@@ -48,6 +48,11 @@ public class Highlander : Enemy
         {
             // take damage and make particle effect, this is legal since the highlander cant be hit multiple times by the 2x bullet
             TakeDamage(2);
+            Instantiate(particleEffectHit, transform.position, Quaternion.identity);
+        } else if (other.gameObject.tag == "Counter Bullet")
+        {
+            // take damage and make particle effect
+            TakeDamage(1);
             Instantiate(particleEffectHit, transform.position, Quaternion.identity);
         }
 
@@ -68,7 +73,7 @@ public class Highlander : Enemy
     public override void Cooldown()
     {
     TimeSpan timeSinceLastCall = DateTime.Now - lastCallTime;
-    if (timeSinceLastCall.TotalSeconds < 1.5)
+    if (timeSinceLastCall.TotalSeconds < 0.5)
     {
         // Script has been called too soon, exit the method
         return;

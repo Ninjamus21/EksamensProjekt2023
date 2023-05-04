@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LevelSystem : MonoBehaviour
 {
@@ -108,6 +109,7 @@ public class LevelSystem : MonoBehaviour
                 SpawnBuffs_Recoil();
                 SpawnBuffs_Health();
                 SpawnBuffs_Health();
+                SpawnBuffs_Health();
             }
             else if (_enemyCounter == 3)
             {
@@ -117,6 +119,7 @@ public class LevelSystem : MonoBehaviour
                 SpawnBuffs_Damage();
                 SpawnBuffs_Recoil();
                 SpawnBuffs_Speed();
+                SpawnBuffs_Health();
                 SpawnBuffs_Health();
             }
             else if (_enemyCounter == 4)
@@ -129,6 +132,7 @@ public class LevelSystem : MonoBehaviour
                 SpawnBuffs_Speed();
                 SpawnBuffs_Health();
                 SpawnBuffs_Health();
+                SpawnBuffs_Health();
             }
             else if (_enemyCounter == 5)
             {
@@ -138,6 +142,8 @@ public class LevelSystem : MonoBehaviour
                 SpawnBuffs_Recoil();
                 SpawnBuffs_Damage();
                 SpawnBuffs_Speed();
+                SpawnBuffs_Health();
+                SpawnBuffs_Health();
                 SpawnBuffs_Health();
                 SpawnBuffs_Health();
             }
@@ -200,7 +206,7 @@ public class LevelSystem : MonoBehaviour
             {
                 Debug.Log("No more waves, now entering endless mode");
                 timerActive = false;
-                // spawn from the last list in a random order
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
 
             }
         }

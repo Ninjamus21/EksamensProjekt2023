@@ -81,7 +81,7 @@ public class Spawner : Enemy
     public override void Cooldown()
     {
     TimeSpan timeSinceLastCall = DateTime.Now - lastCallTime;
-    if (timeSinceLastCall.TotalSeconds < 1.5)
+    if (timeSinceLastCall.TotalSeconds < 0.5)
     {
         // Script has been called too soon, exit the method
         return;

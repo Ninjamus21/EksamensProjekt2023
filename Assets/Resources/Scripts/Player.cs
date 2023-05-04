@@ -74,7 +74,7 @@ public class Player : Entity
             }
         }
         // damage system for the player
-        if (PlayerCOL.gameObject.tag == "Bullet")
+        if (PlayerCOL.gameObject.tag == "Bullet" || PlayerCOL.gameObject.tag == "Spawnling")
         {
             TakeDamage(1);
             Instantiate(particleEffectHit, transform.position, Quaternion.identity);
@@ -82,6 +82,7 @@ public class Player : Entity
         if (PlayerCOL.gameObject.tag == "Sword")
         {
             Cooldown();
+            Instantiate(particleEffectHit, transform.position, Quaternion.identity);
         }
     }
 

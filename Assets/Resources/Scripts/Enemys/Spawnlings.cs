@@ -8,8 +8,8 @@ public class Spawnlings : MonoBehaviour
     public GameObject spawner;
     public float speed = 10f;
     public float rotateSpeed = 5f;
-    public float drag = 1f;
-    public float maxVelocity = 10f;
+    public float drag = 2f;
+    public float maxVelocity = 9f;
     private Vector3 velocity;
 
     
@@ -26,7 +26,7 @@ public class Spawnlings : MonoBehaviour
         movemento();
     }
     void OnCollisionEnter (Collision col){
-        if(col.gameObject.tag == "Player" || col.gameObject.tag == "Shield" || col.gameObject.tag == "Counter Bullet" || col.gameObject.tag == "2x bullet"){
+        if(col.gameObject.tag == "Player" || col.gameObject.tag == "Shield" || col.gameObject.tag == "Counter Bullet" || col.gameObject.tag == "2x bullet" || col.gameObject.tag == "Bullet"){
             Destroy(gameObject);
         }
     }

@@ -114,7 +114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
-  swingSpeed: 2.5
+  swingSpeed: 1.2
   sword: {fileID: 3361008777858423685, guid: 15676ed9c14b1c84ea8f44574c2f377d, type: 3}
   InstantiantedSword: {fileID: 0}
   player: {fileID: 0}
