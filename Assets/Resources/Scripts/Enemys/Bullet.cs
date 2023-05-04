@@ -23,7 +23,7 @@ public class Bullet : MonoBehaviour
 
     public void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Ranger" || collision.gameObject.tag == "bullet")
+        if (collision.gameObject.tag == "Ranger" || collision.gameObject.tag == "Bullet" || collision.gameObject.tag == "Plane")
         {
             //Yes, do nothing
         }
@@ -58,18 +58,20 @@ public class Bullet : MonoBehaviour
             // create a new instance of the new object
             GameObject newGameObject = Instantiate(newObject, oldObject.transform.position, oldObject.transform.rotation);
             // buff conditions for the bullet damage
-            if (player.GetComponent<Player>().IsBuffedDamage) 
+            if (player.GetComponent<Player>().IsBuffedDamage)
             {
                 newGameObject.tag = "2x bullet";
             }
-        
+
             // buff conditions for the bullet speed recoil
             if (player.GetComponent<Player>().IsBuffedRecoil)
-            { 
-            velocityMulitplier *= buff;
-            newGameObject = Instantiate(newObject, oldObject.transform.position, oldObject.transform.rotation);
-            } else {
-            velocityMulitplier = 2.0f;
+            {
+                velocityMulitplier *= buff;
+                newGameObject = Instantiate(newObject, oldObject.transform.position, oldObject.transform.rotation);
+            }
+            else
+            {
+                velocityMulitplier = 2.0f;
             }
             // set the velocity of the new object to match the old object
             newGameObject.GetComponent<Rigidbody>().velocity = velocity * velocityMulitplier;

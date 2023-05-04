@@ -44,12 +44,14 @@ public class Highlander : Enemy
         {
             // ensure that the shield cant hit the Highlander multiple times, and make particle effect ^^
             Cooldown();
-        } else if (other.gameObject.tag == "2x bullet")
+        }
+        else if (other.gameObject.tag == "2x bullet")
         {
             // take damage and make particle effect, this is legal since the highlander cant be hit multiple times by the 2x bullet
             TakeDamage(2);
             Instantiate(particleEffectHit, transform.position, Quaternion.identity);
-        } else if (other.gameObject.tag == "Counter Bullet")
+        }
+        else if (other.gameObject.tag == "Counter Bullet")
         {
             // take damage and make particle effect
             TakeDamage(1);
@@ -61,10 +63,10 @@ public class Highlander : Enemy
     {
         // Rotate the sword around the highlander at a constant speed
         InstantiantedSword.transform.RotateAround(transform.position, Vector3.up, swingSpeed * Time.deltaTime);
-        
+
         // Set the position of the sword to be a certain distance away from the highlander
         InstantiantedSword.transform.position = transform.position + transform.forward * swordDistance;
-        
+
         // Ensure that the sword is always facing away from the highlander
         InstantiantedSword.transform.LookAt(transform.position);
         InstantiantedSword.transform.Rotate(new Vector3(0, 180, 0));
@@ -72,18 +74,18 @@ public class Highlander : Enemy
     //make sure the sword cant hit the player multiple times
     public override void Cooldown()
     {
-    TimeSpan timeSinceLastCall = DateTime.Now - lastCallTime;
-    if (timeSinceLastCall.TotalSeconds < 0.5)
-    {
-        // Script has been called too soon, exit the method
-        return;
-    }
-    // Script logic
-    TakeDamage(1);
-    Instantiate(particleEffectHit, transform.position, Quaternion.identity);
+        TimeSpan timeSinceLastCall = DateTime.Now - lastCallTime;
+        if (timeSinceLastCall.TotalSeconds < 0.5)
+        {
+            // Script has been called too soon, exit the method
+            return;
+        }
+        // Script logic
+        TakeDamage(1);
+        Instantiate(particleEffectHit, transform.position, Quaternion.identity);
 
-    // Update the last call time to the current time
-    lastCallTime = DateTime.Now;
+        // Update the last call time to the current time
+        lastCallTime = DateTime.Now;
 
     }
 
