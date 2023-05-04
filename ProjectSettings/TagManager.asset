@@ -16,6 +16,7 @@ TagManager:
   - Heal
   - Spawner
   - Spawnling
+  - Plane
   layers:
   - Default
   - TransparentFX
