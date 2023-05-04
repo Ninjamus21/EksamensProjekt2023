@@ -19,7 +19,7 @@ public class Spawner : Enemy
     private Vector3 targetPosition;
     public float spawnling_distance = 2.0f;
     private List<GameObject> activeSpawnlings = new List<GameObject>();
-    public int maxActive = 10;
+    public int maxActive = 100;
     public bool SpawnerisAlive = false;
     
     void Start()

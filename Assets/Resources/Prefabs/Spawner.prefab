@@ -107,7 +107,7 @@ MonoBehaviour:
   player: {fileID: 0}
   fixedYPosition: 0.7
   spawnling_distance: 2
-  maxActive: 10
+  maxActive: 100
   SpawnerisAlive: 0
 --- !u!135 &6557582065174537390
 SphereCollider:
