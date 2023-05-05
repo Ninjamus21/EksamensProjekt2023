@@ -8,7 +8,7 @@ public class LevelSystem : MonoBehaviour
 {
     public GameObject[] enemyPrefabs; // Array of enemy prefabs to be instantiated
     public float maxSpawnRadius = 10f; // Maximum distance from the spawn point that an enemy can spawn
-    public List<int> SpawnEnemiesInWave_one = new List<int>() {}; // The number of enemies to spawn in the first wave, make this in the editor
+    public List<int> SpawnEnemiesInWave_one = new List<int>() {0,0,0,1,2}; // The number of enemies to spawn in the first wave, make this in the editor
     public List<int> SpawnEnemiesInWave_two = new List<int>() {}; 
     public List<int> SpawnEnemiesInWave_three = new List<int>() {};
     public List<int> SpawnEnemiesInWave_four = new List<int>() {};

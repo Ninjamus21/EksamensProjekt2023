@@ -19,13 +19,13 @@ public class Spawner : Enemy
     private Vector3 targetPosition;
     public float spawnling_distance = 2.0f;
     private List<GameObject> activeSpawnlings = new List<GameObject>();
-    public int maxActive = 100;
+    public int maxActive = 10;
     public bool SpawnerisAlive = false;
     
     void Start()
     {
-        targetPosition = transform.position;
         navAgent = GetComponent<NavMeshAgent>();
+        targetPosition = transform.position;
         health = 2;
         player = GameObject.FindGameObjectWithTag("Player").transform;
         SpawnerisAlive = true;
@@ -36,6 +36,7 @@ public class Spawner : Enemy
     {
         Move();
         Attack();
+
     }
     void FixedUpdate()
     {
@@ -81,7 +82,7 @@ public class Spawner : Enemy
     public override void Cooldown()
     {
     TimeSpan timeSinceLastCall = DateTime.Now - lastCallTime;
-    if (timeSinceLastCall.TotalSeconds < 0.5)
+    if (timeSinceLastCall.TotalSeconds < 1.5)
     {
         // Script has been called too soon, exit the method
         return;

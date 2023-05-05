@@ -2,78 +2,128 @@
 
 Title Game
 namespace UnityBuild{
-class Monobehavior{
-+void Start()
-+void FixedUpdate()
-}
-class Vector3{
+    class Monobehavior{
+        +void Start()
+        +void FixedUpdate()
+    }
+    class Vector3{
 
-}
-class Transform{
+    }
+    class Transform{
 
-}
+    }
 }
 
-abstract class Utility{
-+ void use()
-+ void pickup()
-}
+
 
 class Player{
 
-+ void Move()
-+ void Attack()
-+ void ChangeWeapon()
-- bool online() = false
+    + void Move()
+    + void moisePos()
+    + void look()
+    + void HPChange()
+
 }
 
 abstract class Entity{
-- Health
-- Damage
-- Movespeed
+    - Health
+    - Damage
+    - Movespeed
+    + void TakeDamage(float _damage)
+    + void Cooldown()
+    + void Die()
 
 }
 abstract class Enemy{
+    + void Attack()
+    + void track()
+    + void Move()
+    + NavMeshAgent
+}
+
+class Ranged{
 
 }
-abstract class Ranged{
+class Highlander{
 
 }
-abstract class Bruiser{
-
-}
-abstract class Spawner{
+class Spawner{
 
 }
 
 class PlayerShield{
-+ void ThrowShield()
-+ void RecallShield()
+    + void ThrowShield()
+    + void RecallShield()
 }
 
-abstract class Weapons{
-- damage
-- firerate
-+ void pickup
-}
 
 abstract class Buffs{
+    + void destroyBuffs()
+    + void OnTriggerEnter()
 
 }
 
+class SpeedUP{
+    + void SpeedUP()
+}
+class DamageUP{
+    + void DamageUP()
+}
+class HealthUP{
+    + void HealthUP()
+}
+class RecoilUP{
+    + void RecoilUP()
+}
+
+class LevelSystem{
+    + void LevelUP()
+    + void trackLevel()
+    + void trackTime()
+    + void SpawnAtRandomPosition()
+    + void SpawnBuffs()
+    + void SpawnEnemies()
+}
+
+class Bullets {
+    + void OnTriggerEnter()
+    + void DestroyBullet()
+    + void ChangeObject()
+}
+class Spawnlings{
+    + void OnTriggerEnter()
+    + void DestroySpawnlings()
+    + void TrackPlayer()
+}
+class Sword{
+    + void OnTriggerEnter()
+    + void DestroySword()
+}
 
 Enemy -up-|> Entity
-Player -up-|> Entity 
+Player -up-|> Entity
 Enemy <|-- Ranged
-Enemy <|-- Bruiser
-Enemy <|-- Spawner 
+Enemy <|-- Highlander
+Enemy <|-- Spawner
 Entity -up-|> UnityBuild.Monobehavior
 Entity -up-|> UnityBuild.Vector3
 Entity -up-|> UnityBuild.Transform
-Utility -up-|> UnityBuild.Monobehavior
-Utility -up-|> UnityBuild.Vector3
-Utility -up-|> UnityBuild.Transform
+Buffs -up-|> UnityBuild.Monobehavior
+Buffs -up-|> UnityBuild.Vector3
+Buffs -up-|> UnityBuild.Transform
 Player -> PlayerShield
-Weapons -|> Player
-Buffs --|> Utility
+Sword -up-> Highlander
+Bullets -up-> Ranged
+Spawnlings -up-> Spawner
+DamageUP -up-|> Buffs
+SpeedUP -up-|> Buffs
+HealthUP -up-|> Buffs
+RecoilUP -up-|> Buffs
+HealthUP -down-> LevelSystem
+SpeedUP -down-> LevelSystem
+DamageUP -down-> LevelSystem
+RecoilUP -down-> LevelSystem
+Highlander -down-> LevelSystem
+Ranged -down-> LevelSystem
+Spawner -down-> LevelSystem
 @enduml

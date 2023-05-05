@@ -1,0 +1,27 @@
+@startuml
+left to right direction
+
+actor Player
+
+rectangle Unity {
+  Player -> (UserInput)
+  (UserInput) --> (PlayerController)
+  (PlayerController) --> (IngamePlayer)
+    (IngamePlayer) --> (Enemy)
+    (IngamePlayer) --> (PowerUp)
+
+  (EnemyController) --> (Enemy)
+
+  (LevelSystem) --> (PowerUpType)
+    (PowerUpType) --> (PowerUp)
+
+  (PlayerController) --> (Shield)
+
+
+  (LevelSystem) --> (EnemyType)
+    (EnemyType) --> (Enemy)
+
+
+}
+
+@enduml
