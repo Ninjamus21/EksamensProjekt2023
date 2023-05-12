@@ -6,7 +6,7 @@ public class Bullet : MonoBehaviour
 {
     public GameObject oldObject; // reference to the old object
     public GameObject newObject; // reference to the new object
-    public float velocityMulitplier = 2.0f;
+    public float velocityMulitplier = 4.0f;
     public GameObject player;
     public float buff = 2.0f;
     // Start is called before the first frame update

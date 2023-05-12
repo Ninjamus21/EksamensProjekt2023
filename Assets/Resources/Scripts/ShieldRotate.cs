@@ -55,6 +55,7 @@ public class ShieldRotate : MonoBehaviour
     }
     void transformMoveShield()
     {
+        // Move the shield towards the target position at a constant speed
         transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * rotationSpeed);
     }
 

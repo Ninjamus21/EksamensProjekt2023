@@ -202,13 +202,14 @@ public class LevelSystem : MonoBehaviour
                 SpawnBuffs_Health();
                 SpawnBuffs_Health();
             }
-            else
+            else if (GameObject.FindObjectsOfType<Enemy>().Length == 0 && _enemyCounter <= 11)
             {
                 Debug.Log("No more waves, now entering endless mode");
                 timerActive = false;
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
 
             }
+
         }
         Level();
     }
